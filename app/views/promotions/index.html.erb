@@ -9,7 +9,7 @@
     </tr>
     <% @promotions.each do |item| %>
       <tr>
-      <td><%= link_to(item.name, promotion_path(item.id)) %></td>
+      <td><%= link_to item.name, item %></td>
       <td><%= item.description %></td>
       <td><%= number_to_percentage(item.discount_rate, precision: 2, separator: ',') %></td>
       </tr>
