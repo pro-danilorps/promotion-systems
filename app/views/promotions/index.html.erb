@@ -1,5 +1,5 @@
 <% if @promotions.empty? %>
-  <strong>Nenhuma promoção cadastrada</strong>
+  <p><strong>Nenhuma promoção cadastrada</strong></p>
 <% else %>
   <table>
     <tr>
@@ -15,5 +15,6 @@
       </tr>
     <% end %>
   </table>
+  <br>
 <% end %>
 <%= link_to 'Voltar', root_path %>

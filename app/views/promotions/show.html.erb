@@ -3,6 +3,6 @@
 <p>Desconto: <%= number_to_percentage(@promotion.discount_rate, precision: 2, separator: ',') %> </p>
 <p>Código: <%= @promotion.code%> </p>
 <p>Válido Até: <%= @promotion.expiration_date.strftime("%d/%m/%Y") %> </p>
-<p>Cupons Restantes: <%= @promotion.coupon_quantity%> </p>
+<p>Cupons Restantes: <%= @promotion.coupon_quantity%></p>
 <br>
 <%= link_to 'Voltar', promotions_path %>
