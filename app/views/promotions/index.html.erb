@@ -1,0 +1,25 @@
+<% if @promotions.empty? %>
+  <strong>Nenhuma promoção cadastrada</strong>
+<% else %>
+  <table>
+    <tr>
+    <th>Nome</th>
+    <th>Descrição</th>
+    <th>Código</th>
+    <th>% de Desconto</th>
+    <th># de Cupons</th>
+    <th>Válido Até</th>
+    </tr>
+      <% @promotions.each do |item| %>
+      <tr>
+      <td><%= item.name %></td>
+      <td><%= item.description %></td>
+      <td><%= item.code %></td>
+      <td><%= number_to_percentage(item.discount_rate, precision: 2, separator: ',') %></td>
+      <td><%= item.coupon_quantity %></td>
+      <td><%= item.expiration_date %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<%= link_to 'Voltar', root_path %>
