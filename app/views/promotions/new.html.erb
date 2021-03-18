@@ -36,7 +36,7 @@
 </div>
 <div>
 <%= f.label :expiration_date, 'Data de término: '%>
-<%= f.date_field :expiration_date %>
+<%= f.text_field :expiration_date %>
 <% @promotion.errors.full_messages_for(:expiration_date).each do |message| %>
   <div><%= message %></div>
 <% end %>
