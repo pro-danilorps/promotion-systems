@@ -16,3 +16,6 @@
   <dt>Cupons Restantes:</dt>
   <dd><%= @promotion.coupon_quantity%></dd>
 </dl>
+<% if @promotion.coupons.any? %>
+<%= render "coupons", promotion: @promotion %>
+<% end %>

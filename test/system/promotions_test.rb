@@ -129,6 +129,10 @@ class PromotionsTest < ApplicationSystemTestCase
     click_on 'Gerar cupons'
     assert_text 'Cupons gerados com sucesso!'
     assert_no_button 'Gerar cupons'
+    assert_text 'NATAL10-0001'
+    assert_text 'NATAL10-0010'
+    assert_text 'NATAL10-0100'
+    assert_no_text 'NATAL10-1000'
   end
 
 end
