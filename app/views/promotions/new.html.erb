@@ -1,45 +1,36 @@
+<h3>Registrar uma Promoção</h3>
+<%= link_to 'Voltar', root_path %><br><br>
+<% if @promotion.errors.any? %>
+<ul>
+<% @promotion.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+<% end %>
+</ul>
+<% end %>
 <%= form_with model: @promotion do |f| %>
 <div>
 <%= f.label :name, 'Nome: '%>
 <%= f.text_field :name %>
-    <% @promotion.errors.full_messages_for(:name).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
 </div>
 <div>
 <%= f.label :description, 'Descrição: '%>
 <%= f.text_area :description %>
-    <% @promotion.errors.full_messages_for(:description).each do |message| %>
-      <div><%= message %></div>
-    <% end %>
 </div>
 <div>
 <%= f.label :code, 'Código: '%>
 <%= f.text_field :code %>
-<% @promotion.errors.full_messages_for(:code).each do |message| %>
-  <div><%= message %></div>
-<% end %>
 </div>
 <div>
 <%= f.label :discount_rate, 'Desconto: '%>
 <%= f.number_field :discount_rate, in:1.00..100.00, step: 0.01 %>
-<% @promotion.errors.full_messages_for(:discount_rate).each do |message| %>
-  <div><%= message %></div>
-<% end %>
 </div>
 <div>
 <%= f.label :coupon_quantity, 'Quantidade de cupons: '%>
 <%= f.number_field :coupon_quantity, min:1 %>
-<% @promotion.errors.full_messages_for(:coupon_quantity).each do |message| %>
-  <div><%= message %></div>
-<% end %>
 </div>
 <div>
 <%= f.label :expiration_date, 'Data de término: '%>
 <%= f.text_field :expiration_date %>
-<% @promotion.errors.full_messages_for(:expiration_date).each do |message| %>
-  <div><%= message %></div>
-<% end %>
 </div>
 <div>
 <%= f.submit 'Criar promoção '%>
