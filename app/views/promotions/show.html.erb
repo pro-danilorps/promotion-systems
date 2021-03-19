@@ -2,7 +2,8 @@
 <%= link_to 'Voltar', promotions_path %>
 <% if @promotion.coupons.empty? %>
  | <%= link_to 'Editar Promoção', edit_promotion_path(@promotion) %>
- | <%= link_to 'Gerar cupons', generate_coupons_promotion_path, method: :post%>
+ | <%= link_to 'Apagar Promoção', promotion_path(@promotion), method: :delete%>
+ | <%= link_to 'Gerar Cupons', generate_coupons_promotion_path, method: :post%>
  <% end %>
 <p><%=flash[:notice]%></p>
 <dl>

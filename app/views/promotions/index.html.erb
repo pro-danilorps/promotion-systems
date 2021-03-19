@@ -1,6 +1,7 @@
 <h3>Promoções no Sistema</h3>
 <%= link_to 'Voltar', root_path %>
- | <%= link_to 'Registrar uma promoção', new_promotion_path %>
+ | <%= link_to 'Registrar uma Promoção', new_promotion_path %>
+ <p><%=flash[:notice]%></p>
 <br>
 <br>
 <% if @promotions.empty? %>

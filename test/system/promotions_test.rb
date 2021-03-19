@@ -77,14 +77,14 @@ class PromotionsTest < ApplicationSystemTestCase
   test 'create promotion' do
     visit root_path
     click_on 'Promoções'
-    click_on 'Registrar uma promoção'
+    click_on 'Registrar uma Promoção'
     fill_in 'Nome', with: 'Cyber Monday'
     fill_in 'Descrição', with: 'Promoção de Cyber Monday'
     fill_in 'Código', with: 'CYBER15'
     fill_in 'Desconto', with: '15'
     fill_in 'Quantidade de cupons', with: '90'
     fill_in 'Data de término', with: '22/12/2033'
-    click_on 'Criar promoção'
+    click_on 'Criar Promoção'
 
     assert_current_path promotion_path(Promotion.last)
     assert_text 'Cyber Monday'
@@ -99,8 +99,8 @@ class PromotionsTest < ApplicationSystemTestCase
   test 'create and attributes cannot be blank' do
     visit root_path
     click_on 'Promoções'
-    click_on 'Registrar uma promoção'
-    click_on 'Criar promoção'
+    click_on 'Registrar uma Promoção'
+    click_on 'Criar Promoção'
 
     assert_text 'não pode ficar em branco', count: 5
   end
@@ -112,10 +112,10 @@ class PromotionsTest < ApplicationSystemTestCase
 
     visit root_path
     click_on 'Promoções'
-    click_on 'Registrar uma promoção'
+    click_on 'Registrar uma Promoção'
     fill_in 'Nome', with: 'Natal'
     fill_in 'Código', with: 'NATAL10'
-    click_on 'Criar promoção'
+    click_on 'Criar Promoção'
     
     assert_text 'deve ser único', count: 2
   end
@@ -126,10 +126,10 @@ class PromotionsTest < ApplicationSystemTestCase
       expiration_date: '22/12/2033')
   
     visit promotion_path(promotion)
-    click_on 'Gerar cupons'
+    click_on 'Gerar Cupons'
 
     assert_text 'Cupons gerados com sucesso!'
-    assert_no_button 'Gerar cupons'
+    assert_no_link 'Gerar Cupons'
     assert_text 'NATAL10-0001'
     assert_text 'NATAL10-0010'
     assert_text 'NATAL10-0100'
@@ -164,6 +164,30 @@ class PromotionsTest < ApplicationSystemTestCase
 
     assert_text 'Natal de 2021'
     assert_text 'Alterações feitas com sucesso!'
+  end
+  
+  test 'destroy a promotion' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                                  expiration_date: '22/12/2033')
+    
+    visit promotion_path(promotion)
+    click_on 'Apagar Promoção'
+    
+    assert_no_text 'Natal'
+    assert_text 'Promoção apagada com sucesso!'
+  end
+
+  test 'inability to edit or delete a promotion that has generated coupons' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+
+      visit promotion_path(promotion)
+      click_on 'Gerar Cupons'
+
+      assert_no_link 'Apagar Promoção'
+      assert_no_link 'Editar Promoção'
   end
 
 end
