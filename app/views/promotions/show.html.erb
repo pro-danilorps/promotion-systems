@@ -1,8 +1,9 @@
 <h3><%= @promotion.name %></h3>
 <%= link_to 'Voltar', promotions_path %>
 <% if @promotion.coupons.empty? %>
+ | <%= link_to 'Editar Promoção', generate_coupons_promotion_path %>
  | <%= link_to 'Gerar cupons', generate_coupons_promotion_path, method: :post%>
-<% end %>
+ <% end %>
 <p><%=flash[:notice]%></p>
 <dl>
   <dt>Descrição:</dt>
