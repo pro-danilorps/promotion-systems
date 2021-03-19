@@ -116,7 +116,7 @@ class PromotionsTest < ApplicationSystemTestCase
     fill_in 'Nome', with: 'Natal'
     fill_in 'Código', with: 'NATAL10'
     click_on 'Criar promoção'
-
+    
     assert_text 'deve ser único', count: 2
   end
 
@@ -127,12 +127,43 @@ class PromotionsTest < ApplicationSystemTestCase
   
     visit promotion_path(promotion)
     click_on 'Gerar cupons'
+
     assert_text 'Cupons gerados com sucesso!'
     assert_no_button 'Gerar cupons'
     assert_text 'NATAL10-0001'
     assert_text 'NATAL10-0010'
     assert_text 'NATAL10-0100'
     assert_no_text 'NATAL10-1000'
+  end
+
+  test 'input blank into edit' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+      
+    visit edit_promotion_path(promotion)
+    fill_in 'Nome', with: ''
+    fill_in 'Descrição', with: ''
+    fill_in 'Código', with: ''
+    fill_in 'Desconto', with: ''
+    fill_in 'Quantidade de cupons', with: ''
+    fill_in 'Data de término', with: ''
+    click_on 'Confirmar alterações'
+
+    assert_text 'não pode ficar em branco', count: 5
+  end
+
+  test 'successfully edit an promotion' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+      
+    visit edit_promotion_path(promotion)
+    fill_in 'Nome', with: 'Natal de 2021'
+    click_on 'Confirmar alterações'
+
+    assert_text 'Natal de 2021'
+    assert_text 'Alterações feitas com sucesso!'
   end
 
 end

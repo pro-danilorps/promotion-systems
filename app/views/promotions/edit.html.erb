@@ -1,4 +1,4 @@
-<h3>Registrar uma Promoção</h3>
+<h3>Editando <%=@promotion.name%> </h3>
 <%= link_to 'Voltar', promotions_path %><br><br>
 <% if @promotion.errors.any? %>
 <ul>
@@ -7,4 +7,4 @@
 <% end %>
 </ul>
 <% end %>
-<%= render "form", submit_text: 'Criar promoção', promotion: @promotion %>
+<%= render "form", submit_text: 'Confirmar alterações', promotion: @promotion%>
