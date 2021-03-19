@@ -19,5 +19,14 @@
   <dd><%= @promotion.coupon_quantity%></dd>
 </dl>
 <% if @promotion.coupons.any? %>
-<%= render "coupons", promotion: @promotion %>
+  <h4> Cupons Gerados: </h4>
+  <table>
+    <tr>
+    <th>Código</th>
+    </tr>
+  <% @promotion.coupons.each do |coupon|%>
+    <tr>
+    <td><%=coupon.code%></td>
+    </tr>
+  <% end %>
 <% end %>
