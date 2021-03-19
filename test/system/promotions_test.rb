@@ -100,12 +100,6 @@ class PromotionsTest < ApplicationSystemTestCase
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar uma promoção'
-    #fill_in 'Nome', with: ''
-    #fill_in 'Descrição', with: ''
-    #fill_in 'Código', with: ''
-    #fill_in 'Desconto', with: ''
-    #fill_in 'Quantidade de cupons', with: ''
-    #fill_in 'Data de término', with: ''
     click_on 'Criar promoção'
 
     assert_text 'não pode ficar em branco', count: 5
@@ -124,6 +118,17 @@ class PromotionsTest < ApplicationSystemTestCase
     click_on 'Criar promoção'
 
     assert_text 'deve ser único', count: 2
+  end
+
+  test 'generate promotion coupon codes' do
+    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
+      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+      expiration_date: '22/12/2033')
+  
+    visit promotion_path(promotion)
+    click_on 'Gerar cupons'
+    assert_text 'Cupons gerados com sucesso!'
+    assert_no_button 'Gerar cupons'
   end
 
 end
