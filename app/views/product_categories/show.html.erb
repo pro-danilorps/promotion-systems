@@ -1,0 +1,9 @@
+<h3><%= @product_category.name %></h3>
+<%= link_to 'Voltar', product_categories_path %>
+ | <%= link_to 'Editar Categoria de Produto', edit_product_category_path(@product_category) %>
+ | <%= link_to 'Apagar Categoria de Produto', product_category_path(@product_category), method: :delete%>
+<p><%=flash[:notice]%></p>
+<dl>
+  <dt>Código:</dt>
+  <dd><%= @product_category.code%></dd>
+</dl>

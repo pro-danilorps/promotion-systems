@@ -1,0 +1,19 @@
+<h3>Categorias de Produto no Sistema</h3>
+<%= link_to 'Voltar', root_path %>
+ | <%= link_to 'Registrar uma Categoria de Produto', new_product_category_path %>
+ <p><%=flash[:notice]%></p>
+<% if @product_categories.empty? %>
+  <p><strong>Nenhuma promoção cadastrada</strong></p>
+<% end %>
+<table>
+  <tr>
+  <th>Nome</th>
+  <th>Código</th>
+  </tr>
+  <% @product_categories.each do |item| %>
+    <tr>
+    <td><%= link_to item.name, item %></td>
+    <td><%= item.code %></td>
+    </tr>
+  <% end %>
+</table>
