@@ -172,8 +172,10 @@ class PromotionsTest < ApplicationSystemTestCase
                                   expiration_date: '22/12/2033')
     
     visit promotion_path(promotion)
-    click_on 'Apagar Promoção'
-    
+    accept_confirm do
+      click_on 'Apagar Promoção'
+    end
+
     assert_no_text 'Natal'
     assert_text 'Promoção apagada com sucesso!'
   end

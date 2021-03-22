@@ -44,7 +44,7 @@ class PromotionsController < ApplicationController
 
   def generate_coupons
     @promotion = Promotion.find(params[:id])
-    Coupon.generate_coupons(@promotion)
+    @promotion.generate_coupons!
     if @promotion.coupons.any?
       flash[:notice] = 'Cupons gerados com sucesso!'
       redirect_to @promotion

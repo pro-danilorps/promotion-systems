@@ -43,9 +43,11 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     visit root_path
     click_on 'Categorias de Produto'
     click_on 'Produto Anti-Fraude'
-    click_on 'Apagar Categoria de Produto'
+    accept_confirm do
+      click_on 'Apagar Categoria de Produto'
+    end
 
-    assert_text 'Apagado com sucesso!'
+    assert_text 'Categoria apagada com sucesso!'
   end
 
 end
