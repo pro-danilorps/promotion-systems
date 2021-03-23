@@ -19,6 +19,8 @@ class Promotion < ApplicationRecord
 
   end
 
+  # TODO: Fazer o insert_all funcionar corretamente
+  
   private
   def coupons?
     coupons.any?
