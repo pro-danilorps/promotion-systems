@@ -23,10 +23,21 @@
   <table>
     <tr>
     <th><%= Promotion.human_attribute_name(:code) %></th>
+    <th>Estado</th>
+    <th>Ações</th>
     </tr>
   <% @promotion.coupons.each do |coupon|%>
-    <tr>
+    <tr id="coupon-<%= coupon.code.parameterize%>">
     <td><%=coupon.code%></td>
+    <td><%=Coupon.human_attribute_name("status.#{coupon.status}")%></td>
+    <td>
+      <% if coupon.active?%>
+        <%= link_to 'Desabilitar', disable_coupon_path(coupon), method: :post %>
+      <% end %>
+      <% if coupon.disabled?%>
+        <%= link_to 'Ativar', activate_coupon_path(coupon), method: :post %>
+      <% end %>
+    </td>
     </tr>
   <% end %>
 <% end %>

@@ -4,4 +4,10 @@ class Coupon < ApplicationRecord
   validates :code, :promotion_id, presence: true
   validates :code, uniqueness: true
 
+  enum status: {
+    active: 0,
+    used: 1,
+    disabled: 2
+  }
+
 end
