@@ -1,28 +1,28 @@
 <h3><%= @promotion.name %></h3>
 <%= link_to 'Voltar', promotions_path %>
 <% if @promotion.coupons.empty? %>
- | <%= link_to 'Editar Promoção', edit_promotion_path(@promotion) %>
- | <%= link_to 'Apagar Promoção', promotion_path(@promotion), method: :delete,  data: { confirm: "Tem certeza disso?" }%>
- | <%= link_to 'Gerar Cupons', generate_coupons_promotion_path, method: :post %>
+ | <%= link_to t('.edit_promotion'), edit_promotion_path(@promotion) %>
+ | <%= link_to t('.delete_promotion'), promotion_path(@promotion), method: :delete,  data: { confirm: "Tem certeza disso?" }%>
+ | <%= link_to t('.generate_coupons'), generate_coupons_promotion_path, method: :post %>
  <% end %>
-<p><%=flash[:notice]%></p>
+
 <dl>
-  <dt>Descrição:</dt>
+  <dt><%= Promotion.human_attribute_name(:description) %></dt>
   <dd><%= @promotion.description%></dd>
-  <dt>Desconto:</dt>
-  <dd><%= number_to_percentage(@promotion.discount_rate, precision: 2, separator: ',') %></dd>
-  <dt>Código:</dt>
+  <dt><%= Promotion.human_attribute_name(:discount_rate) %></dt>
+  <dd><%= number_to_percentage @promotion.discount_rate, precision: 2 %></dd>
+  <dt><%= Promotion.human_attribute_name(:code) %></dt>
   <dd><%= @promotion.code%></dd>
-  <dt>Válido Até:</dt>
+  <dt><%= Promotion.human_attribute_name(:expiration_date) %></dt>
   <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
-  <dt>Cupons Restantes:</dt>
+  <dt><%= Promotion.human_attribute_name(:coupon_quantity) %></dt>
   <dd><%= @promotion.coupon_quantity%></dd>
 </dl>
 <% if @promotion.coupons.any? %>
   <h4> Cupons Gerados: </h4>
   <table>
     <tr>
-    <th>Código</th>
+    <th><%= Promotion.human_attribute_name(:code) %></th>
     </tr>
   <% @promotion.coupons.each do |coupon|%>
     <tr>
