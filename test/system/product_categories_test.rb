@@ -25,7 +25,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     fill_in 'Código', with: ''
     click_on 'Confirmar Alterações'
 
-    assert_text 'Não pode ficar em branco', count: 2
+    assert_text 'não pode ficar em branco', count: 2
   end
 
   test 'edit and its a success' do

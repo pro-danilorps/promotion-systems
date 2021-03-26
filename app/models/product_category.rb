@@ -1,4 +1,4 @@
 class ProductCategory < ApplicationRecord
-  validates :name, :code, presence: { message: 'Não pode ficar em branco' }
-  validates :code, :name, uniqueness: { message: 'Deve ser único'}
+  validates :name, :code, presence: { message: 'não pode ficar em branco' }
+  validates :code, :name, uniqueness: { message: 'deve ser único'}
 end

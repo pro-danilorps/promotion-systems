@@ -5,8 +5,8 @@ class ProductCategoryTest < ActiveSupport::TestCase
     product_category = ProductCategory.new
 
     refute product_category.valid?
-    assert_includes product_category.errors[:name], 'Não pode ficar em branco'
-    assert_includes product_category.errors[:code], 'Não pode ficar em branco'
+    assert_includes product_category.errors[:name], 'não pode ficar em branco'
+    assert_includes product_category.errors[:code], 'não pode ficar em branco'
   end
 
   test 'code must be uniq' do
@@ -14,7 +14,7 @@ class ProductCategoryTest < ActiveSupport::TestCase
     product_category = ProductCategory.new(code: 'ANTIFRA', name: 'Produto Anti-Fraude')
 
     refute product_category.valid?
-    assert_includes product_category.errors[:code], 'Deve ser único'
-    assert_includes product_category.errors[:name], 'Deve ser único'
+    assert_includes product_category.errors[:code], 'deve ser único'
+    assert_includes product_category.errors[:name], 'deve ser único'
   end
 end
