@@ -13,6 +13,7 @@ class CouponsTest < ApplicationSystemTestCase
     )
     promotion.generate_coupons!
 
+    login_user
     visit promotion_path(promotion)
     within 'tr#coupon-natal10-0002' do
       click_on 'Desabilitar'
@@ -36,6 +37,7 @@ class CouponsTest < ApplicationSystemTestCase
     )
     promotion.generate_coupons!
 
+    login_user
     visit promotion_path(promotion)
     within 'tr#coupon-natal10-0002' do
       click_on 'Desabilitar'

@@ -6,6 +6,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
     ProductCategory.create!(name: 'Produto Pro-Fraude', code: 'PROFRA')
 
+    login_user
     visit root_path
     click_on 'Categorias de Produto'
 
@@ -18,6 +19,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
   test 'edit and leave blank fields to return errors' do
     product_category = ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
 
+    login_user
     visit edit_product_category_path(product_category)
     fill_in 'Nome', with: ''
     fill_in 'Código', with: ''
@@ -29,6 +31,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
   test 'edit and its a success' do
     product_category = ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
 
+    login_user
     visit edit_product_category_path(product_category)
     fill_in 'Nome', with: 'Produto Pro-Fraude'
     fill_in 'Código', with: 'PROFRA'
@@ -40,6 +43,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
   test 'destroy product category' do
     ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
     
+    login_user
     visit root_path
     click_on 'Categorias de Produto'
     click_on 'Produto Anti-Fraude'

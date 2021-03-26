@@ -43,7 +43,7 @@ class PromotionsController < ApplicationController
     if @promotion.coupons.any?
       redirect_to @promotion, notice: t('.success')
     else
-      redirect_to @promotion, notice: t('.failure')
+      redirect_to @promotion, alert: t('.failure')
     end
   end
   
