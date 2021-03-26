@@ -9,13 +9,11 @@ class Promotion < ApplicationRecord
   
   def generate_coupons!
     return if coupons?
-    
+
     (1..coupon_quantity).each do |coupon|
       coupon_code = "#{code}-#{"%04d" % coupon}"
       coupons.create!(code: coupon_code)
-      #coupons.new(code: coupon_code)
     end
-    #Coupon.insert_all([coupons])
 
   end
 
