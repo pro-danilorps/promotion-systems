@@ -1,7 +1,9 @@
 <h3>Promoções no Sistema</h3>
 <%= link_to 'Voltar', root_path %>
  | <%= link_to 'Registrar uma Promoção', new_promotion_path %>
- <p><%=flash[:notice]%></p>
+ | <%= link_to 'Buscar Promoções', search_promotions_promotions_path %>
+ | <%= link_to 'Buscar Cupons', search_coupons_promotions_path %>
+ <hr>
 <% if @promotions.empty? %>
   <p><strong>Nenhuma promoção cadastrada</strong></p>
 <% end %>

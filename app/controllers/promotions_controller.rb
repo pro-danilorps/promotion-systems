@@ -46,6 +46,26 @@ class PromotionsController < ApplicationController
       redirect_to @promotion, alert: t('.failure')
     end
   end
+
+  def search_coupons
+
+  end
+
+  def search_promotions
+    if params[:query] != nil
+      @promotions = Promotion.all.select{|promotion| 
+        promotion.name.downcase.include?(
+          params[:query].downcase
+        )
+      }
+    end
+  end
+
+  def search_coupons
+    if params[:query] != nil
+      @coupon = Coupon.find_by code: params[:query]
+    end
+  end
   
   private
 

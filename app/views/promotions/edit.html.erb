@@ -1,5 +1,6 @@
 <h3>Editando <%=@promotion.name%> </h3>
-<%= link_to 'Voltar', promotions_path %><br><br>
+<%= link_to 'Voltar', promotions_path %>
+<hr>
 <% if @promotion.errors.any? %>
 <ul>
 <% @promotion.errors.full_messages.each do |message| %>
