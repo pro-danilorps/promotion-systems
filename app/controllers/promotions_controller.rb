@@ -47,26 +47,14 @@ class PromotionsController < ApplicationController
     end
   end
 
-  def search_coupons
-
+  def search
+    @promotion = Promotion.search_partial(params[:query])
+    render index
+    # TODO: Adicionar um botão para busca literal ou parcial
+    # TODO: Enviar para o index, que já usa as promotions e condicionar para o search não fazer nada com o index caso não haja busca
+    # TODO: Search na página de promoção
   end
-
-  def search_promotions
-    if params[:query] != nil
-      @promotions = Promotion.all.select{|promotion| 
-        promotion.name.downcase.include?(
-          params[:query].downcase
-        )
-      }
-    end
-  end
-
-  def search_coupons
-    if params[:query] != nil
-      @coupon = Coupon.find_by code: params[:query]
-    end
-  end
-  
+ 
   private
 
   def promotion_find

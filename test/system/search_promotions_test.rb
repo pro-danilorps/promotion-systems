@@ -1,0 +1,1 @@
+# TODO: Testes para search promotions

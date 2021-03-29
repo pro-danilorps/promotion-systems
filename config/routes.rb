@@ -5,14 +5,14 @@ Rails.application.routes.draw do
   
   resources :promotions do
     post 'generate_coupons', on: :member
-    get 'search_promotions', on: :collection
-    get 'search_coupons', on: :collection
+    get 'search', on: :collection
   end
   
   resources :product_categories
 
   resources :coupons, only: [] do
     post 'disable','activate', on: :member
+    # get 'search', on: :collection
   end
 
 end
