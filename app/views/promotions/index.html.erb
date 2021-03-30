@@ -10,12 +10,10 @@
   <div class="col-12 me-auto">
   <%= link_to 'Buscar Promoções', search_promotions_path, class: 'btn btn-primary' %>
   </div>
-  <%= form_with url: search_promotions_path, class: 'row row-cols-md-auto', method: :get do |form| %>
-    <div class="col-12 ms-auto">
+  <%= form_with url: search_promotions_path, class:'d-flex', method: :get do |form| %>
+    <div class="col-12 ms-auto input-group">
       <%= form.label :query, "Busca", class: 'visually-hidden' %>
       <%= form.search_field :query, class: 'form-control', type: "search" , placeholder: "Buscar Promoção", 'aria-label': 'Buscar Promoção' %>
-    </div>
-    <div class="col-12">
       <%= form.submit "Buscar", class: 'btn btn-success' %>
     </div>
   <% end %>
