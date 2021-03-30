@@ -1,1 +1,0 @@
-# TODO: Teste de search_coupons

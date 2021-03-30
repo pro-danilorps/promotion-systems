@@ -232,7 +232,6 @@ class PromotionsTest < ApplicationSystemTestCase
     login_user
     visit root_path
     click_on 'Promoções'
-    click_on 'Buscar Promoções'
     fill_in 'Busca', with: 'Natal'
     click_on 'Buscar'
 
