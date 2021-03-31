@@ -1,8 +1,10 @@
+<% if user_signed_in? %>
+  
+
 <nav style="background:lightgray;padding:0.5em">
   <%= link_to 'Promoções', promotions_path %>
   | <%= link_to 'Categorias de Produto', product_categories_path %>
-  <% if user_signed_in? %>
-    | <%= link_to current_user.email, '#' %>
-    | <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-  <% end %>
+  | <%= link_to current_user.email, '#' %>
+  | <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 </nav>
+<% end %>

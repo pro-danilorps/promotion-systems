@@ -1,5 +1,6 @@
 <h3>Registrar uma Categoria de Produto</h3>
 <%= link_to 'Voltar', product_categories_path %><br><br>
+<hr>
 <% if @product_category.errors.any? %>
 <ul>
 <% @product_category.errors.full_messages.each do |message| %>

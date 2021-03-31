@@ -1,7 +1,7 @@
 <h3>Categorias de Produto no Sistema</h3>
 <%= link_to 'Voltar', root_path %>
  | <%= link_to 'Registrar uma Categoria de Produto', new_product_category_path %>
- <p><%=flash[:notice]%></p>
+ <hr>
 <% if @product_categories.empty? %>
   <p><strong>Nenhuma promoção cadastrada</strong></p>
 <% end %>

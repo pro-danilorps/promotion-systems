@@ -2,7 +2,7 @@
 <%= link_to 'Voltar', product_categories_path %>
  | <%= link_to 'Editar Categoria de Produto', edit_product_category_path(@product_category) %>
  | <%= link_to 'Apagar Categoria de Produto', product_category_path(@product_category), method: :delete, data: { confirm: "Tem certeza disso?" } %>
-<p><%=flash[:notice]%></p>
+<hr>
 <dl>
   <dt>Código:</dt>
   <dd><%= @product_category.code%></dd>
