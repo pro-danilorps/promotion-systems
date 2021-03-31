@@ -22,6 +22,7 @@ class Promotion < ApplicationRecord
   end
 
   def self.search_partial(query)
+    return [] if query==""
     where('name LIKE ?', "%#{query}%")
   end
 

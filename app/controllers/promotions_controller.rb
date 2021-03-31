@@ -48,11 +48,14 @@ class PromotionsController < ApplicationController
   end
 
   def search
-    @promotions = Promotion.search_partial(params[:query])
+    @search_type = params[:search_type]
+    @query = params[:query]
+    if @search_type == 'partial'
+      @promotions = Promotion.search_partial(@query)
+    else
+      @promotions = Promotion.search_exact(@query)
+    end
     render :index
-    # TODO: Adicionar um botão para busca literal ou parcial
-    # TODO: Enviar para o index, que já usa as promotions e condicionar para o search não fazer nada com o index caso não haja busca
-    # TODO: Search na página de promoção
   end
  
   private
