@@ -10,4 +10,8 @@ class Coupon < ApplicationRecord
     disabled: 2
   }
 
+  def self.search(query)
+    where('code = ?', query)
+  end
+
 end

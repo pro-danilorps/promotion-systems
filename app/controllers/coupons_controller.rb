@@ -11,6 +11,16 @@ class CouponsController < ApplicationController
     redirect_to promotion_path(@coupon.promotion), notice: t('.success', coupon_code: @coupon.code)
   end
 
+  def search
+    @query = params[:query]
+    if @query == nil
+      return
+    else
+      @coupon = Coupon.search(@query)
+      render :search
+    end
+  end
+
   private
 
   def coupon_find

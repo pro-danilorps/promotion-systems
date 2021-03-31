@@ -26,12 +26,6 @@ class Promotion < ApplicationRecord
     where('name LIKE ?', "%#{query}%")
   end
 
-  def self.search_coupons
-    if params[:query] != nil
-      @coupon = Coupon.find_by code: params[:query]
-    end
-  end
-
   # TODO: Fazer o insert_all funcionar corretamente
   
   private

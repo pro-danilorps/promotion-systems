@@ -1,12 +1,12 @@
 <h3> Busca de cupons</h3>
 <%= link_to 'Voltar', promotions_path %>
 <hr>
-<%= form_with url: search_coupons_promotions_path, method: :get do |form| %>
+<%= form_with url: coupons_search_path, method: :get do |form| %>
   <%= form.label :query, "Buscar por:" %>
   <%= form.text_field :query %>
   <%= form.submit "Buscar" %>
 <% end %>
-<% if @coupon != nil %>
+<% if @coupon != [] && @coupon != nil %>
   <br>
   <h4> Cupons Gerados: </h4>
     <table>
