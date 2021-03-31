@@ -1,20 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <%= link_to 'Promotion System', root_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav me-auto">
-        <%= link_to 'Promoções', promotions_path, class: "nav-link"  %>
-        <%= link_to 'Categorias de Produto', product_categories_path, class: "nav-link" %>
-      </div>
-      <% if user_signed_in? %>
-      <div class="navbar-nav ms-auto">
-        <%= link_to current_user.email, '#', class: "nav-link"  %>
-        <%= link_to 'Sair', destroy_user_session_path, method: :delete, class: "nav-link" %>
-      </div>
-      <% end %>
-    </div>
-  </div>
+<nav style="background:lightgray;padding:0.5em">
+  <%= link_to 'Promoções', promotions_path %>
+  | <%= link_to 'Categorias de Produto', product_categories_path %>
+  <% if user_signed_in? %>
+    | <%= link_to current_user.email, '#' %>
+    | <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+  <% end %>
 </nav>

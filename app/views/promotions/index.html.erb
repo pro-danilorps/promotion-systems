@@ -1,28 +1,18 @@
-<div class="bg-light pb-2 pt-2">
-<h3>Promoções no Sistema</h3>
-<div class="row row-cols-md-auto align-items-center">
-  <div class="col-12">
-    <%= link_to "Voltar", root_path, class: 'btn btn-primary' %>
-  </div>
-  <div class="col-12">
-    <%= link_to 'Registrar uma Promoção', new_promotion_path, class: 'btn btn-primary' %> 
-  </div>
-  <div class="col-12 me-auto">
-  <%= link_to 'Buscar Promoções', search_promotions_path, class: 'btn btn-primary' %>
-  </div>
-  <%= form_with url: search_promotions_path, class:'d-flex', method: :get do |form| %>
-    <div class="col-12 ms-auto input-group">
-      <%= form.label :query, "Busca", class: 'visually-hidden' %>
-      <%= form.search_field :query, class: 'form-control', type: "search" , placeholder: "Buscar Promoção", 'aria-label': 'Buscar Promoção' %>
-      <%= form.submit "Buscar", class: 'btn btn-success' %>
-    </div>
-  <% end %>
-</div>
-</div>
 
+<h3>Promoções no Sistema</h3>
+<%= link_to "Voltar", root_path %>
+ | <%= link_to 'Registrar uma Promoção', new_promotion_path %> 
+ | <%= link_to 'Buscar Cupons', search_promotions_path, class: 'btn btn-primary' %>
+<%= form_with url: search_promotions_path, method: :get do |form| %>
+  <%= form.label :query, "Busca" %>
+  <%= form.search_field :query, type: "search" , placeholder: "Buscar Promoção" %>
+  <%= form.submit "Buscar" %>
+<% end %>
+<hr>
 <% if @promotions.empty? %>
   <p><strong>Nenhuma promoção cadastrada</strong></p>
 <% end %>
+
 <table>
   <tr>
   <th>Nome</th>

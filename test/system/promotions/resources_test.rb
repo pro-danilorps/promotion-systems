@@ -1,6 +1,7 @@
 require 'application_system_test_case'
 
-class PromotionsTest < ApplicationSystemTestCase
+class ResourcesTest < ApplicationSystemTestCase
+
   test 'view promotions' do
     Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
                       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
@@ -131,24 +132,6 @@ class PromotionsTest < ApplicationSystemTestCase
     assert_text 'já está em uso', count: 2
   end
 
-  test 'generate promotion coupon codes' do
-    promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-      expiration_date: '22/12/2033'
-    )
-    
-    login_user
-    visit promotion_path(promotion)
-    click_on 'Gerar Cupons'
-
-    assert_text 'Cupons gerados com sucesso!'
-    assert_no_link 'Gerar Cupons'
-    assert_text 'NATAL10-0001'
-    assert_text 'NATAL10-0010'
-    assert_text 'NATAL10-0100'
-    assert_no_text 'NATAL10-1000'
-  end
-
   test 'input blank into edit' do
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
       code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
@@ -213,32 +196,4 @@ class PromotionsTest < ApplicationSystemTestCase
     assert_no_link 'Editar Promoção'
   end
 
-  test 'search promotions by partial terms (and find results)' do
-    xmas = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-      expiration_date: '22/12/2033'
-    )
-
-    xmassy = Promotion.create!(name: 'Natalina', description: 'Promoção Natalina',
-      code: 'NATALINA15', discount_rate: 15, coupon_quantity: 100,
-      expiration_date: '22/12/2033'
-    )
-
-    cyber = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-      code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
-      expiration_date: '22/12/2033'
-    )
-
-    login_user
-    visit root_path
-    click_on 'Promoções'
-    fill_in 'Busca', with: 'Natal'
-    click_on 'Buscar'
-
-    assert_text xmas.name
-    assert_text xmassy.name
-    refute_text cyber.name
-    
-    # TODO: Passar a busca para a página de promoções
-  end
 end
