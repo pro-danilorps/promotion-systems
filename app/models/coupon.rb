@@ -11,7 +11,7 @@ class Coupon < ApplicationRecord
   }
 
   def self.search(query)
-    where('code = ?', query)
+    find_by('code = ?', query)
   end
 
 end
