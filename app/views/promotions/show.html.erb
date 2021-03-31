@@ -17,6 +17,10 @@
   <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
   <dt><%= Promotion.human_attribute_name(:coupon_quantity) %></dt>
   <dd><%= @promotion.coupon_quantity%></dd>
+  <dt>Criado por:</dt>
+  <dd><%=@promotion.user.name%></dd>
+  <dt>Aprovado por:</dt>
+  <dd>NINGUEM</dd>
 </dl>
 <% if @promotion.coupons.any? %>
   <h4> Cupons Gerados: </h4>

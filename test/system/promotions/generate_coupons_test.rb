@@ -19,3 +19,5 @@ class GenerateCouponsTest < ApplicationSystemTestCase
     assert_no_text 'NATAL10-1000'
   end
 end
+
+# TODO: generate coupons test para não gerar para promoções não validadas

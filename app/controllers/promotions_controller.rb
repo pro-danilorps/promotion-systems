@@ -13,7 +13,7 @@ class PromotionsController < ApplicationController
   end
 
   def create
-    @promotion = Promotion.new(promotion_params)
+    @promotion = current_user.promotions.new(promotion_params)
     if @promotion.save
       redirect_to @promotion
     else
@@ -60,19 +60,14 @@ class PromotionsController < ApplicationController
  
   private
 
-  def promotion_find
-    @promotion = Promotion.find(params[:id])
-  end
+    def promotion_params
+      params
+        .require(:promotion)
+        .permit(:name, :expiration_date, :description,
+                :discount_rate, :code, :coupon_quantity)
+    end
 
-  def promotion_params
-    params.require(:promotion).permit(
-      :name,
-      :description,
-      :code,
-      :discount_rate,
-      :coupon_quantity,
-      :expiration_date
-    )
-  end
-
+    def promotion_find
+      @promotion = Promotion.find(params[:id])
+    end
 end

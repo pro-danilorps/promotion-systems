@@ -14,8 +14,17 @@ class ActiveSupport::TestCase
   #Minitest.load_plugins
   #Minitest::PrideIO.pride!
 
-  def login_user(user = User.create!(email: 'jane.doe@iugu.com.br', password: '123456'))
+  def login_user(user)
     login_as user, scope: :user
+  end
+
+  def create_user
+    user = User.create!(name: 'Fulano de Tal', email: 'fulano@iugu.com.br', password: '123456')
+    user
+  end
+
+  def create_another_user
+    user = User.create!(name: 'Beltrano de Tal', email: 'beltrano@iugu.com.br', password: '123456')
     user
   end
 

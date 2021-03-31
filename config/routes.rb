@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
-  devise_for :users
   root 'home#index'
   
+  devise_for :users
+  resources :users, only: %i[show]
   resources :promotions do
     post 'generate_coupons', on: :member
     get 'search', on: :collection

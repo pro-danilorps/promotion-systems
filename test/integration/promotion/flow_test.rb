@@ -1,7 +1,6 @@
-  
 require 'test_helper'
 
-class PromotionFlowTest < ActionDispatch::IntegrationTest
+class FlowTest < ActionDispatch::IntegrationTest
   test 'can create a promotion' do
     login_user
     post '/promotions', params: { 
