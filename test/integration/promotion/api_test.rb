@@ -4,7 +4,7 @@ class ApiTest < ActionDispatch::IntegrationTest
   
   def setup
     user = create_user
-    Promotion.create!(
+    @promotion = Promotion.create!(
       name: 'Natal',
       description: 'Promoção de Natal',
       code: 'NATAL10',
@@ -25,10 +25,11 @@ class ApiTest < ActionDispatch::IntegrationTest
   end
   
   test 'show coupon' do
-    coupon = Coupon.create!(code: 'NATAL10-0001', promotion: promotion)
+    coupon = Coupon.create!(code: 'NATAL10-0001', promotion: @promotion)
 
     get "/api/v1/coupons/#{coupon.code}"
 
     assert_response 200
+    assert_equal coupon.code, response.parsed_body['code']
   end
 end

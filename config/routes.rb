@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
-
   devise_for :users
   root 'home#index'
-  
-  
   
   resources :promotions do
     member do
@@ -19,5 +16,10 @@ Rails.application.routes.draw do
   get 'coupons/search', to: 'coupons#search'
   
   resources :product_categories
-  # resources :users, only: %i[show]
+
+  namespace :api do
+    namespace :v1 do
+      resources :coupons, only: %i[show], param: :code
+    end
+  end
 end
