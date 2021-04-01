@@ -1,11 +1,15 @@
 Rails.application.routes.draw do
-  
+
+  devise_for :users
   root 'home#index'
   
-  devise_for :users
-  resources :users, only: %i[show]
+  
+  
   resources :promotions do
-    post 'generate_coupons', on: :member
+    member do
+      post 'generate_coupons'
+      post 'approve'
+    end
     get 'search', on: :collection
     resources :coupons, shallow: true, only: [] do
       post 'disable','activate', on: :member
@@ -15,5 +19,5 @@ Rails.application.routes.draw do
   get 'coupons/search', to: 'coupons#search'
   
   resources :product_categories
-
+  # resources :users, only: %i[show]
 end

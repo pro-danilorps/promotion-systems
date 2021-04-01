@@ -9,7 +9,7 @@ class Promotion < ApplicationRecord
             presence: true
   validates :code, :name, uniqueness: true
 
-  
+  # TODO: Fazer o Insert-All funcionar corretamente
   def generate_coupons!
     return if coupons?
 
@@ -17,7 +17,6 @@ class Promotion < ApplicationRecord
       coupon_code = "#{code}-#{"%04d" % coupon}"
       coupons.create!(code: coupon_code)
     end
-
   end
 
   def self.search_exact(query)
@@ -29,10 +28,16 @@ class Promotion < ApplicationRecord
     where('name LIKE ?', "%#{query}%")
   end
 
-  # TODO: Fazer o insert_all funcionar corretamente
-  
-  private
   def coupons?
     coupons.any?
   end
+
+  def approved?
+    promotion_approval.present?
+  end
+
+  def can_approve?(current_user)
+    user != current_user
+  end
+
 end

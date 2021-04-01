@@ -1,5 +1,7 @@
 class PromotionsController < ApplicationController
-  before_action :promotion_find, only: %i[show edit update generate_coupons]
+  before_action :promotion_find, only: %i[
+    show edit update generate_coupons approve
+  ]
 
   def index
     @promotions = Promotion.all
@@ -58,6 +60,11 @@ class PromotionsController < ApplicationController
     render :index
   end
  
+  def approve
+    current_user.promotion_approvals.create!(promotion: @promotion)
+    redirect_to @promotion, notice: 'Promoção aprovada com sucesso!'
+  end
+
   private
 
     def promotion_params

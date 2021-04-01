@@ -15,20 +15,13 @@
 <% if @promotions.empty? %>
   <p><strong>Nenhuma promoção cadastrada ou encontrada</strong></p>
 <% else %>
+
 <table>
   <tr>
   <th>Nome</th>
   <th>Descrição</th>
   <th>% de Desconto</th>
   </tr>
-  <% @promotions.each do |item| %>
-    <tr>
-    <td><%= link_to item.name, item %></td>
-    <td><%= item.description %></td>
-    <td><%= number_to_percentage(item.discount_rate, precision: 2, separator: ',') %></td>
-    </tr>
-  <% end %>
+<%= render @promotions %>
 </table>
 <% end %>
-
-
