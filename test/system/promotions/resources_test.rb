@@ -151,16 +151,18 @@ class ResourcesTest < ApplicationSystemTestCase
   
   test 'destroy a promotion' do
     visit promotion_path(@promotion)
-    accept_confirm do
-      click_on 'Apagar Promoção'
-    end
+    accept_confirm { click_on 'Apagar Promoção' }
 
     assert_no_text 'Natal'
     assert_text 'Promoção apagada com sucesso!'
   end
 
   test 'inability to edit or delete a promotion that has generated coupons' do
+    user = create_another_user
+    login_as(user)
+
     visit promotion_path(@promotion)
+    accept_confirm { click_on 'Aprovar Promoção' }
     click_on 'Gerar Cupons'
 
     assert_no_link 'Apagar Promoção'

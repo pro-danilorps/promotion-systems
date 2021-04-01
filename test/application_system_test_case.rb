@@ -5,8 +5,4 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   
   Capybara.server = :puma, { Silent: true}
   
-  #def take_failed_screenshot
-  #  false
-  #end
-
 end

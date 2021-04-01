@@ -18,7 +18,7 @@ class SearchTest < ApplicationSystemTestCase
       code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
       expiration_date: '22/12/2033', user: user
     )
-    login_user(user)
+    login_as(user)
   end
   
   test 'search promotions by partial terms (and find results)' do
