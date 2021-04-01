@@ -2,6 +2,7 @@ class PromotionsController < ApplicationController
   before_action :promotion_find, only: %i[
     show edit update generate_coupons approve
   ]
+  before_action :approval_ok?, only: %i[approve]
 
   def index
     @promotions = Promotion.all
@@ -76,5 +77,10 @@ class PromotionsController < ApplicationController
 
     def promotion_find
       @promotion = Promotion.find(params[:id])
+    end
+
+    def approval_ok?
+      redirect_to @promotion,
+      alert: 'Ação inválida!' unless @promotion.can_approve?(current_user)
     end
 end
