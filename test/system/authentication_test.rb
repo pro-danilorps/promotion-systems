@@ -7,7 +7,7 @@ class AuthenticationTest < ApplicationSystemTestCase
     fill_in 'Nome', with: 'Jane Doe'
     fill_in 'Email', with: 'jane.doe@iugu.com.br'
     fill_in 'Senha', with: 'password'
-    fill_in 'Confirmação de senha', with: 'password'
+    fill_in 'Confirme a nova senha', with: 'password'
     within 'form' do
       click_on 'Confirmar Cadastro'
     end

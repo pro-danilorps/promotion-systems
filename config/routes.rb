@@ -15,6 +15,8 @@ Rails.application.routes.draw do
 
   get 'coupons/search', to: 'coupons#search'
   
+  
+  resources :users, only: %i[show]
   resources :product_categories
 
   namespace :api do

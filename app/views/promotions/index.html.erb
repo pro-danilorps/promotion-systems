@@ -1,27 +1,34 @@
 <h3>Promoções no Sistema</h3>
-<%= link_to t('buttons.back'), root_path %>
- | <%= link_to t('.create'), new_promotion_path %> 
- | <%= link_to t('.coupon_search'), coupons_search_path %>
-<%= form_with url: search_promotions_path, method: :get do |form| %>
-  <%= form.label :query, "Busca" %>
-  <%= form.search_field :query, type: "search" , placeholder: "Buscar Promoção" %>
-  <%= form.radio_button :search_type, "partial", checked: true %>
-  <%= form.label :search_type_partial, "Busca Parcial" %>
-  <%= form.radio_button :search_type, "exact" %>
-  <%= form.label :search_type_exact, "Busca Exata" %>
-  <%= form.submit "Buscar" %>
-<% end %>
-<hr>
-<% if @promotions.empty? %>
-  <p><strong>Nenhuma promoção cadastrada ou encontrada</strong></p>
-<% else %>
-
-<table>
-  <tr>
-  <th>Nome</th>
-  <th>Descrição</th>
-  <th>% de Desconto</th>
-  </tr>
-<%= render @promotions %>
-</table>
-<% end %>
+<div style="width:100%;height:1.5em;line-height:1.5em">
+  <div style="float:left">
+    <%= link_to t('buttons.back'), root_path %>
+    | <%= link_to t('.create'), new_promotion_path %> 
+    | <%= link_to t('.coupon_search'), coupons_search_path %>
+  </div>
+  <div style="float:right">
+    <%= form_with url: search_promotions_path, method: :get do |form| %>
+      <%= form.label :query, "Busca" %>
+      <%= form.search_field :query, type: "search" , placeholder: "Buscar Promoção" %>
+      <%= form.radio_button :search_type, "partial", checked: true %>
+      <%= form.label :search_type_partial, "Busca Parcial" %>
+      <%= form.radio_button :search_type, "exact" %>
+      <%= form.label :search_type_exact, "Busca Exata" %>
+      <%= form.submit "Buscar" %>
+    <% end %>
+  </div>
+</div>
+<div >
+  <hr>
+  <% if @promotions.empty? %>
+    <p><strong>Nenhuma promoção cadastrada ou encontrada</strong></p>
+  <% else %>
+  <table>
+    <tr>
+    <th>Nome</th>
+    <th>Descrição</th>
+    <th>% de Desconto</th>
+    </tr>
+  <%= render @promotions %>
+  </table>
+  <% end %>
+</div>

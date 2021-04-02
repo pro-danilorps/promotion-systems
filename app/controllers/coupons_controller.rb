@@ -21,8 +21,6 @@ class CouponsController < ApplicationController
     end
   end
 
-  # TODO: Cupons devem exibir a promoção a qual pertencem e o estado de uso
-
   private
 
   def coupon_find

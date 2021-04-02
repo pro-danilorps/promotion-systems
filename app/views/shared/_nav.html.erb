@@ -1,10 +1,12 @@
 <% if user_signed_in? %>
-  
-
-<nav style="background:lightgray;padding:0.5em">
-  <%= link_to 'Promoções', promotions_path %>
-  | <%= link_to 'Categorias de Produto', product_categories_path %>
-  || <%= link_to current_user.name, '#' %>
-  | <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-</nav>
+  <nav style="background:lightyellow;padding:0.5em;display:block;width:100%vw;height:1em">
+    <div style="float:left">
+      <%= link_to 'Promoções', promotions_path %>
+      | <%= link_to 'Categorias de Produto', product_categories_path %>
+    </div>
+    <div style="float:right">
+      <%= link_to current_user.name, current_user %>
+      | <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+    </div>
+  </nav>
 <% end %>

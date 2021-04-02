@@ -1,0 +1,10 @@
+<h3><%= @title %></h3>
+<%= link_to t('buttons.back'), :back %>
+ | <%= link_to 'Editar', edit_user_registration_path(@user) if @edit %>
+<hr>
+<dl>
+  <dt>Quantidade de promoções criadas</dt>
+  <dd><%= @user.promotions.count %> </dd>
+  <dt>Quantidade de romoções aprovadas</dt>
+  <dd><%= @user.promotion_approvals.count %> </dd>
+</dl>
