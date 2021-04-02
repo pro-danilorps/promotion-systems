@@ -6,26 +6,22 @@
   <%= form.text_field :query %>
   <%= form.submit "Buscar" %>
 <% end %>
+<%= "Nenhum cupom encontrado!" if @coupon == nil && params[:commit] ==  'Buscar' %>
 <% if @coupon != [] && @coupon != nil %>
-  <br>
-  <h4> Cupons Gerados: </h4>
-    <table>
-      <tr>
-      <th><%= Promotion.human_attribute_name(:code) %></th>
-      <th>Estado</th>
-      <th>Ações</th>
-      </tr>
-      <tr id="coupon-<%= @coupon.code.parameterize%>">
-      <td><%=@coupon.code%></td>
-      <td><%=Coupon.human_attribute_name("status.#{@coupon.status}")%></td>
-      <td>
+  <h4> <%= @coupon.code %> </h4>
+    <dl>
+      <dt>Promoção</dt>
+      <dd><%= @coupon.promotion.name %></dd>
+      <dt>Estado</dt>
+      <dd><%=Coupon.human_attribute_name("status.#{@coupon.status}")%></dd>
+      <dt>Ações</dt>
+      <dd>
         <% if @coupon.active?%>
           <%= link_to 'Desabilitar', disable_coupon_path(@coupon), method: :post %>
         <% end %>
         <% if @coupon.disabled?%>
           <%= link_to 'Ativar', activate_coupon_path(@coupon), method: :post %>
         <% end %>
-      </td>
-      </tr>
-      </table>
+      </dd>
+    </dl>
 <% end %>
