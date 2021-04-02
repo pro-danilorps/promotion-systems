@@ -23,7 +23,7 @@ class ApprobationTest < ApplicationSystemTestCase
     visit promotion_path(@promotion)
     accept_confirm { click_on 'Aprovar Promoção' }
 
-    assert_text 'Promoção aprovada com sucesso!'
+    assert_text 'Promoção Natal aprovada com sucesso'
   end
 
   test 'inabillity to approve your own promotion' do

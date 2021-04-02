@@ -1,7 +1,7 @@
 <h3>Promoções no Sistema</h3>
-<%= link_to "Voltar", root_path %>
- | <%= link_to 'Registrar uma Promoção', new_promotion_path %> 
- | <%= link_to 'Buscar Cupom', coupons_search_path %>
+<%= link_to t('buttons.back'), root_path %>
+ | <%= link_to t('.create'), new_promotion_path %> 
+ | <%= link_to t('.coupon_search'), coupons_search_path %>
 <%= form_with url: search_promotions_path, method: :get do |form| %>
   <%= form.label :query, "Busca" %>
   <%= form.search_field :query, type: "search" , placeholder: "Buscar Promoção" %>

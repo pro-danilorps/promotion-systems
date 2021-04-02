@@ -1,14 +1,16 @@
 <h3><%= @promotion.name %></h3>
-<%= link_to 'Voltar', promotions_path %>
+<%= link_to t('buttons.back'), promotions_path %>
 <% if @promotion.approved? %>
   <% unless @promotion.coupons? %>
   | <%= link_to t('.edit_promotion'), edit_promotion_path(@promotion) %>
   | <%= link_to t('.generate_coupons'), generate_coupons_promotion_path, method: :post %>
   <% end %>
 <% elsif @promotion.can_approve?(current_user) %>
-  | <%= link_to 'Aprovar Promoção', approve_promotion_path(@promotion), method: :post , data: { confirm: "Tem certeza disso?"} %>
+  | <%= link_to t('.approve_promotion'), approve_promotion_path(@promotion),
+        method: :post , data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name)} %>
 <% else %>
-  | <%= link_to t('.delete_promotion'), promotion_path(@promotion), method: :delete,  data: { confirm: "Tem certeza disso?" } %>
+  | <%= link_to t('.delete_promotion'), promotion_path(@promotion),
+        method: :delete,  data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name) } %>
  <% end %>
 <hr>
 <dl>
@@ -22,10 +24,10 @@
   <dd><%= @promotion.expiration_date.strftime("%d/%m/%Y") %></dd>
   <dt><%= Promotion.human_attribute_name(:coupon_quantity) %></dt>
   <dd><%= @promotion.coupon_quantity%></dd>
-  <dt>Criado por:</dt>
+  <dt><%= Promotion.human_attribute_name(:user) %></dt>
   <dd><%=@promotion.user.name%></dd>
   <% if @promotion.approver %>
-  <dt>Aprovado por:</dt>
+ <dt><%= Promotion.human_attribute_name(:approver) %></dt>
   <dd><%=@promotion.approver.name %></dd>
   <% end %>
 </dl>
@@ -43,10 +45,10 @@
     <td><%=Coupon.human_attribute_name("status.#{coupon.status}")%></td>
     <td>
       <% if coupon.active?%>
-        <%= link_to 'Desabilitar', disable_coupon_path(coupon), method: :post %>
+        <%= link_to t('buttons.disable'), disable_coupon_path(coupon), method: :post %>
       <% end %>
       <% if coupon.disabled?%>
-        <%= link_to 'Ativar', activate_coupon_path(coupon), method: :post %>
+        <%= link_to t('buttons.activate'), activate_coupon_path(coupon), method: :post %>
       <% end %>
     </td>
     </tr>

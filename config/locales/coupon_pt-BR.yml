@@ -17,5 +17,4 @@ pt-BR:
     disable:
       success: Cupom %{coupon_code} desabilitado com sucesso!
     activate:
-      success: Cupom %{coupon_code} ativado com sucesso!
-      
+      success: Cupom %{coupon_code} ativado com sucesso!     

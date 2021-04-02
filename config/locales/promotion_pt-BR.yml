@@ -13,16 +13,28 @@ pt-BR:
         discount_rate: Desconto
         coupon_quantity: Quantidade de cupons
         expiration_date: Data de término
+        user: Criador
+        approver: Aprovador
   promotions:
+    index:
+      create: 'Registrar uma Promoção'
+      coupon_search: 'Buscar Cupom'
     show:
       generate_coupons: Gerar Cupons
       edit_promotion: Editar Promoção
       delete_promotion: Apagar Promoção
+      approve_promotion: Aprovar Promoção
+      data-confirm: Tem certeza que deseja %{action} a promoção %{promotion_name}?
     generate_coupons:
-      success: Cupons gerados com sucesso!
-      failure: Erro ao gerar os cupons!
+      success: Cupons gerados com sucesso
+      failure: Erro ao gerar os cupons
     update:
-      success: Alterações feitas com sucesso!
+      success: Alterações feitas com sucesso
     destroy:
-      success: Promoção apagada com sucesso!
+      success: Promoção apagada com sucesso
+    approve:
+      success: Promoção %{promotion_name} aprovada com sucesso
+      failure: Ação inválida
+      
+
       

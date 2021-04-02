@@ -63,7 +63,7 @@ class PromotionsController < ApplicationController
  
   def approve
     current_user.promotion_approvals.create!(promotion: @promotion)
-    redirect_to @promotion, notice: 'Promoção aprovada com sucesso!'
+    redirect_to @promotion, notice: t('.success', promotion_name: @promotion.name)
   end
 
   private
@@ -81,6 +81,6 @@ class PromotionsController < ApplicationController
 
     def approval_ok?
       redirect_to @promotion,
-      alert: 'Ação inválida!' unless @promotion.can_approve?(current_user)
+      alert: t('.failure') unless @promotion.can_approve?(current_user)
     end
 end

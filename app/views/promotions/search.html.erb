@@ -1,5 +1,5 @@
 <h3> Busca de promoções</h3>
-<%= link_to 'Voltar', promotions_path %>
+<%= link_to t('buttons.back'), promotions_path %>
 <hr>
 <%= form_with url: search_promotions_path, method: :get do |form| %>
   <%= form.label :query, "Busca" %>

@@ -64,6 +64,6 @@ class FlowTest < ActionDispatch::IntegrationTest
 
     post approve_promotion_path(@promotion)
 
-    assert_equal 'Ação inválida!', flash[:alert]
+    assert_equal 'Ação inválida', flash[:alert]
   end
 end

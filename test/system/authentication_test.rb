@@ -4,7 +4,7 @@ class AuthenticationTest < ApplicationSystemTestCase
   test 'user sign up' do
     visit root_path
     click_on 'Cadastrar'
-    fill_in 'Name', with: 'Jane Doe'
+    fill_in 'Nome', with: 'Jane Doe'
     fill_in 'Email', with: 'jane.doe@iugu.com.br'
     fill_in 'Senha', with: 'password'
     fill_in 'Confirmação de senha', with: 'password'

@@ -146,7 +146,7 @@ class ResourcesTest < ApplicationSystemTestCase
     click_on 'Confirmar Alterações'
 
     assert_text 'Natal de 2021'
-    assert_text 'Alterações feitas com sucesso!'
+    assert_text 'Alterações feitas com sucesso'
   end
   
   test 'destroy a promotion' do
@@ -154,7 +154,7 @@ class ResourcesTest < ApplicationSystemTestCase
     accept_confirm { click_on 'Apagar Promoção' }
 
     assert_no_text 'Natal'
-    assert_text 'Promoção apagada com sucesso!'
+    assert_text 'Promoção apagada com sucesso'
   end
 
   test 'inability to edit or delete a promotion that has generated coupons' do

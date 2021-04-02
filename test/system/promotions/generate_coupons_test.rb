@@ -15,7 +15,7 @@ class GenerateCouponsTest < ApplicationSystemTestCase
     visit promotion_path(promotion)
     click_on 'Gerar Cupons'
 
-    assert_text 'Cupons gerados com sucesso!'
+    assert_text 'Cupons gerados com sucesso'
     assert_no_link 'Gerar Cupons'
     assert_text 'NATAL10-0001'
     assert_text 'NATAL10-0010'
