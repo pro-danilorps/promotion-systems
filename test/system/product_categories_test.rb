@@ -4,8 +4,14 @@ class ProductCategoriesTest < ApplicationSystemTestCase
 
   def setup
     @user = create_user
-    @product_category = ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
-    ProductCategory.create!(name: 'Produto Pro-Fraude', code: 'PROFRA')
+    @product_category = ProductCategory.create!(
+                          name: 'Produto Anti-Fraude',
+                          code: 'ANTIFRA'
+                        )
+    ProductCategory.create!(
+      name: 'Produto Pro-Fraude', 
+      code: 'PROFRA'
+    )
     login_as @user
   end
 
