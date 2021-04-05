@@ -27,9 +27,16 @@ class ApiTest < ActionDispatch::IntegrationTest
   test 'show coupon' do
     coupon = Coupon.create!(code: 'NATAL10-0001', promotion: @promotion)
 
-    get "/api/v1/coupons/#{coupon.code}"
+    get "/api/v1/coupons/#{coupon.code}", as: :json
 
-    assert_response 200
-    assert_equal coupon.code, response.parsed_body['code']
+    assert_response :success
+    body = JSON.parse(response.body, symbolize_names: true)
+    assert_equal @promotion.discount_rate.to_s, body[:discount_rate]
+  end
+
+  test 'show coupon not found ' do
+    get '/api/v1/coupons/0', as: :json
+
+    assert_response :not_found, as: :json
   end
 end
