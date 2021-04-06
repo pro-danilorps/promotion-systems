@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class GenerateCouponsTest < ApplicationSystemTestCase
+class Promotion::GenerateCouponsTest < ApplicationSystemTestCase
   test 'generate promotion coupon codes' do
     user = create_user
     approver = create_another_user

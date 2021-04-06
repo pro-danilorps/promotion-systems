@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class SearchTest < ApplicationSystemTestCase
+class Promotion::SearchTest < ApplicationSystemTestCase
   
   def setup
     user = create_user

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ApiTest < ActionDispatch::IntegrationTest
+class Promotion::ApiTest < ActionDispatch::IntegrationTest
   
   def setup
     user = create_user

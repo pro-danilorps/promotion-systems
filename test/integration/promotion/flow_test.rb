@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FlowTest < ActionDispatch::IntegrationTest
+class Promotion::FlowTest < ActionDispatch::IntegrationTest
   
   def setup 
     @user = create_user

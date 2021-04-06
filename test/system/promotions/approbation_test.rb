@@ -1,6 +1,6 @@
 require 'application_system_test_case'
 
-class ApprobationTest < ApplicationSystemTestCase
+class Promotion::ApprobationTest < ApplicationSystemTestCase
   
   def setup
     user = create_user
