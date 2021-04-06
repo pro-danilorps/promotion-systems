@@ -1,17 +1,13 @@
-class ProductCategoriesController < ApplicationController
-  
+class Api::V1::ProductCategoriesController < Api::V1::ApiController
+
   def index
     @product_categories = ProductCategory.all
   end
 
   def show
-    @product_category = ProductCategory.find(params[:id])
+    @product_category = ProductCategory.find_by!(code: params[:code])
   end
   
-  def new
-    @product_category = ProductCategory.new
-  end
-
   def create
     @product_category = ProductCategory.new(product_category_params)
     if @product_category.save
@@ -19,10 +15,6 @@ class ProductCategoriesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @product_category = ProductCategory.find(params[:id])
   end
 
   def update
@@ -45,7 +37,7 @@ class ProductCategoriesController < ApplicationController
   private
 
   def product_category_params
-    params.require(:product_category).permit(
+    params.permit(
       :name,
       :code
     )

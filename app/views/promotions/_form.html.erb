@@ -25,7 +25,7 @@
   </div>
   <div>
     <%= f.label :product_category_id %>
-    <%= f.select :product_category_id, ProductCategory.all.collect { |pc| [pc.code, pc.id] }, include_blank: true  %>
+    <%= f.select :product_category_id, ProductCategory.all.collect { |pc| [pc.code, pc.id] }, include_blank: true %>
   </div>
   <div>
     <%= f.submit submit_text %>
