@@ -2,13 +2,13 @@
 <%= link_to t('buttons.back'), promotions_path %>
 <% if @promotion.approved? %>
   <% unless @promotion.coupons? %>
-  | <%= link_to t('.edit_promotion'), edit_promotion_path(@promotion) %>
   | <%= link_to t('.generate_coupons'), generate_coupons_promotion_path, method: :post %>
   <% end %>
 <% elsif @promotion.can_approve?(current_user) %>
   | <%= link_to t('.approve_promotion'), approve_promotion_path(@promotion),
         method: :post , data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name)} %>
 <% else %>
+  | <%= link_to t('.edit_promotion'), edit_promotion_path(@promotion) %>
   | <%= link_to t('.delete_promotion'), promotion_path(@promotion),
         method: :delete,  data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name) } %>
  <% end %>
@@ -26,9 +26,13 @@
   <dd><%= @promotion.coupon_quantity%></dd>
   <dt><%= Promotion.human_attribute_name(:user) %></dt>
   <dd><%=@promotion.user.name%></dd>
+  <% if @promotion.product_category %>
+    <dt><%= Promotion.human_attribute_name(:product_category) %></dt>
+    <dd><%= "#{@promotion.product_category.name} (#{@promotion.product_category.code})" %></dd>
+  <% end %>
   <% if @promotion.approver %>
- <dt><%= Promotion.human_attribute_name(:approver) %></dt>
-  <dd><%=@promotion.approver.name %></dd>
+    <dt><%= Promotion.human_attribute_name(:approver) %></dt>
+    <dd><%=@promotion.approver.name %></dd>
   <% end %>
 </dl>
 <% if @promotion.coupons? %>

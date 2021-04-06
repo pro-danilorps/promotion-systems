@@ -22,6 +22,10 @@ class ResourcesTest < ApplicationSystemTestCase
       expiration_date: '22/12/2033',
       user: user
     )
+    ProductCategory.create!(
+      name: 'Produtos Anti-Fraude',
+      code: 'ANTIFRA'
+    )
     login_as(user)
   end
 
@@ -169,4 +173,46 @@ class ResourcesTest < ApplicationSystemTestCase
     assert_no_link 'Editar Promoção'
   end
 
+  test 'create a promotion linked with a product category' do
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Registrar uma Promoção'
+    fill_in 'Nome', with: 'Anti Fraude'
+    fill_in 'Descrição', with: 'Promoção de produtos anti-fraude'
+    fill_in 'Código', with: 'ANTI20'
+    fill_in 'Desconto', with: '20'
+    fill_in 'Quantidade de cupons', with: '30'
+    fill_in 'Data de término', with: '22/12/2033'
+    select 'ANTIFRA'
+    click_on 'Criar Promoção'
+
+    assert_text 'ANTIFRA'
+  end
+
+  test 'create a promotion without a product category' do
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Registrar uma Promoção'
+    fill_in 'Nome', with: 'Anti Fraude'
+    fill_in 'Descrição', with: 'Promoção de produtos anti-fraude'
+    fill_in 'Código', with: 'ANTI20'
+    fill_in 'Desconto', with: '20'
+    fill_in 'Quantidade de cupons', with: '30'
+    fill_in 'Data de término', with: '22/12/2033'
+    select ''
+    click_on 'Criar Promoção'
+
+    refute_text 'ANTIFRA'
+  end
+
+  test 'edit a promotion to have a product category' do
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Natal'
+    click_on 'Editar Promoção'
+    select 'ANTIFRA'
+    click_on 'Confirmar Alterações'
+
+    assert_text 'ANTIFRA'
+  end
 end

@@ -1,5 +1,6 @@
 class Promotion < ApplicationRecord
   belongs_to :user
+  belongs_to :product_category, optional: true
   has_many :coupons, dependent: :restrict_with_error
   has_one :promotion_approval
   has_one :approver, through: :promotion_approval, source: :user
