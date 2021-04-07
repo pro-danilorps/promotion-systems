@@ -1,5 +1,4 @@
 class ProductCategoriesController < ApplicationController
-  
   def index
     @product_categories = ProductCategory.all
   end
@@ -7,7 +6,7 @@ class ProductCategoriesController < ApplicationController
   def show
     @product_category = ProductCategory.find(params[:id])
   end
-  
+
   def new
     @product_category = ProductCategory.new
   end
@@ -41,7 +40,7 @@ class ProductCategoriesController < ApplicationController
     flash[:notice] = 'Categoria apagada com sucesso!'
     redirect_to product_categories_path
   end
-  
+
   private
 
   def product_category_params
@@ -50,5 +49,4 @@ class ProductCategoriesController < ApplicationController
       :code
     )
   end
-
 end

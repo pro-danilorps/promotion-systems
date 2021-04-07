@@ -13,8 +13,8 @@ class CouponsController < ApplicationController
 
   def search
     @query = params[:query]
-    if @query == nil
-      return
+    if @query.nil?
+      nil
     else
       @coupon = Coupon.search(@query)
       render :search
@@ -28,11 +28,6 @@ class CouponsController < ApplicationController
   end
 
   def coupon_params
-    coupon = params.require(:coupon).permit(
-      :code,
-      :promotion
-    )
-
+    params.require(:coupon).permit(:code, :promotion)
   end
-
 end

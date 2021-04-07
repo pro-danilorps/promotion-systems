@@ -2,7 +2,7 @@ class Promotion < ApplicationRecord
   belongs_to :user
   belongs_to :product_category, optional: true
   has_many :coupons, dependent: :restrict_with_error
-  has_one :promotion_approval
+  has_one :promotion_approval, dependent: :restrict_with_error
   has_one :approver, through: :promotion_approval, source: :user
 
   validates :name, :code, :discount_rate,
@@ -15,17 +15,18 @@ class Promotion < ApplicationRecord
     return if coupons?
 
     (1..coupon_quantity).each do |coupon|
-      coupon_code = "#{code}-#{"%04d" % coupon}"
+      coupon_code = "#{code}-#{'%04d' % coupon}"
       coupons.create!(code: coupon_code)
     end
   end
 
   def self.search_exact(query)
-    where('name = ?', query)
+    where(name: query)
   end
 
   def self.search_partial(query)
-    return [] if query==""
+    return [] if query == ''
+
     where('name LIKE ?', "%#{query}%")
   end
 
@@ -40,5 +41,4 @@ class Promotion < ApplicationRecord
   def can_approve?(current_user)
     user != current_user
   end
-
 end

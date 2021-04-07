@@ -1,8 +1,7 @@
 require 'test_helper'
 
 class Promotion::FlowTest < ActionDispatch::IntegrationTest
-  
-  def setup 
+  def setup
     @user = create_user
     Promotion.create!(
       name: 'Natal',
@@ -18,10 +17,10 @@ class Promotion::FlowTest < ActionDispatch::IntegrationTest
 
   test 'can create a promotion' do
     login_as @user
-    post '/promotions', params: { 
+    post '/promotions', params: {
       promotion: { name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-      code: 'CYBER15', discount_rate: 15, coupon_quantity: 5, 
-      expiration_date: '22/12/2033', user: @user }
+                   code: 'CYBER15', discount_rate: 15, coupon_quantity: 5,
+                   expiration_date: '22/12/2033', user: @user }
     }
 
     assert_redirected_to promotion_path(Promotion.last)
@@ -30,10 +29,10 @@ class Promotion::FlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot create a promotion without login' do
-    post '/promotions', params: { 
+    post '/promotions', params: {
       promotion: { name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-        code: 'CYBER15', discount_rate: 15, coupon_quantity: 5, 
-        expiration_date: '22/12/2033' }
+                   code: 'CYBER15', discount_rate: 15, coupon_quantity: 5,
+                   expiration_date: '22/12/2033' }
     }
 
     assert_redirected_to new_user_session_path
@@ -47,7 +46,7 @@ class Promotion::FlowTest < ActionDispatch::IntegrationTest
 
   test 'cannot update promotions without login' do
     @promotion[:name] = 'Natal2'
-  
+
     patch promotion_path(@promotion)
 
     assert_redirected_to new_user_session_path
@@ -60,7 +59,7 @@ class Promotion::FlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'cannot approve a promotion if owner' do
-    login_as (@user)
+    login_as(@user)
 
     post approve_promotion_path(@promotion)
 

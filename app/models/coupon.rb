@@ -13,12 +13,11 @@ class Coupon < ApplicationRecord
 
   delegate :discount_rate, :expiration_date, to: :promotion
 
-  def as_json(options =  {})
+  def as_json(options = {})
     super ({ methods: :discount_rate }.merge(options))
   end
 
   def self.search(query)
     find_by('code = ?', query)
   end
-
 end

@@ -1,7 +1,6 @@
 require 'application_system_test_case'
 
 class Promotion::ApprobationTest < ApplicationSystemTestCase
-  
   def setup
     user = create_user
     @approver = create_another_user
@@ -17,9 +16,9 @@ class Promotion::ApprobationTest < ApplicationSystemTestCase
     login_as(user)
   end
 
-  test 'approve a promotion' do 
+  test 'approve a promotion' do
     login_as(@approver)
-    
+
     visit promotion_path(@promotion)
     accept_confirm { click_on 'Aprovar Promoção' }
 
@@ -37,5 +36,4 @@ class Promotion::ApprobationTest < ApplicationSystemTestCase
 
     assert_no_link 'Gerar Cupons'
   end
-  
 end

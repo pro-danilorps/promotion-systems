@@ -1,6 +1,6 @@
 ENV['RAILS_ENV'] ||= 'test'
-require_relative "../config/environment"
-require "rails/test_help"
+require_relative '../config/environment'
+require 'rails/test_help'
 
 class ActiveSupport::TestCase
   include Warden::Test::Helpers
@@ -11,17 +11,14 @@ class ActiveSupport::TestCase
   # fixtures :all
 
   # Add more helper methods to be used by all tests here...
-  #Minitest.load_plugins
-  #Minitest::PrideIO.pride!
+  # Minitest.load_plugins
+  # Minitest::PrideIO.pride!
 
   def create_user
-    user = User.create!(name: 'Fulano de Tal', email: 'fulano@iugu.com.br', password: '123456')
-    user
+    User.create!(name: 'Fulano de Tal', email: 'fulano@iugu.com.br', password: '123456')
   end
 
   def create_another_user
-    user = User.create!(name: 'Beltrano de Tal', email: 'beltrano@iugu.com.br', password: '123456')
-    user
+    User.create!(name: 'Beltrano de Tal', email: 'beltrano@iugu.com.br', password: '123456')
   end
-
 end

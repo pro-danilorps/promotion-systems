@@ -1,7 +1,6 @@
 require 'application_system_test_case'
 
 class CouponsTest < ApplicationSystemTestCase
-  
   def setup
     @user = create_user
     @approver = create_another_user
@@ -25,15 +24,15 @@ class CouponsTest < ApplicationSystemTestCase
     within 'tr#coupon-natal10-0002' do
       click_on 'Desabilitar'
     end
-    
-    assert_text "Cupom NATAL10-0002 desabilitado com sucesso!"
+
+    assert_text 'Cupom NATAL10-0002 desabilitado com sucesso!'
     within 'tr#coupon-natal10-0002' do
-      assert_text "Desabilitado"
-      assert_no_link "Desabilitar"
-    end 
+      assert_text 'Desabilitado'
+      assert_no_link 'Desabilitar'
+    end
   end
 
-  test 're-enable a coupon' do 
+  test 're-enable a coupon' do
     @promotion.generate_coupons!
 
     visit promotion_path(@promotion)
@@ -44,10 +43,10 @@ class CouponsTest < ApplicationSystemTestCase
       click_on 'Ativar'
     end
 
-    assert_text "Cupom NATAL10-0002 ativado com sucesso!"
+    assert_text 'Cupom NATAL10-0002 ativado com sucesso!'
     within 'tr#coupon-natal10-0002' do
-      assert_text "Ativo"
-      assert_no_link "Ativar"
-    end 
+      assert_text 'Ativo'
+      assert_no_link 'Ativar'
+    end
   end
 end

@@ -1,26 +1,22 @@
 require 'application_system_test_case'
 
 class Promotion::SearchTest < ApplicationSystemTestCase
-  
   def setup
     user = create_user
     @xmas = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-      expiration_date: '22/12/2033', user: user
-    )
+                              code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                              expiration_date: '22/12/2033', user: user)
 
     @xmassy = Promotion.create!(name: 'Natalina', description: 'Promoção Natalina',
-      code: 'NATALINA15', discount_rate: 15, coupon_quantity: 100,
-      expiration_date: '22/12/2033', user: user
-    )
+                                code: 'NATALINA15', discount_rate: 15, coupon_quantity: 100,
+                                expiration_date: '22/12/2033', user: user)
 
     @cyber = Promotion.create!(name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-      code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
-      expiration_date: '22/12/2033', user: user
-    )
+                               code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
+                               expiration_date: '22/12/2033', user: user)
     login_as(user)
   end
-  
+
   test 'search promotions by partial terms (and find results)' do
     visit root_path
     click_on 'Promoções'
@@ -51,5 +47,4 @@ class Promotion::SearchTest < ApplicationSystemTestCase
 
     assert_text 'Nenhuma promoção cadastrada ou encontrada'
   end
-
 end

@@ -1,10 +1,10 @@
-require "test_helper"
+require 'test_helper'
 
 class ProductCategoryTest < ActiveSupport::TestCase
   test 'attributes cannot be blank' do
     product_category = ProductCategory.new
 
-    refute product_category.valid?
+    assert_not product_category.valid?
     assert_includes product_category.errors[:name], 'não pode ficar em branco'
     assert_includes product_category.errors[:code], 'não pode ficar em branco'
   end
@@ -13,7 +13,7 @@ class ProductCategoryTest < ActiveSupport::TestCase
     ProductCategory.create!(name: 'Produto Anti-Fraude', code: 'ANTIFRA')
     product_category = ProductCategory.new(code: 'ANTIFRA', name: 'Produto Anti-Fraude')
 
-    refute product_category.valid?
+    assert_not product_category.valid?
     assert_includes product_category.errors[:code], 'deve ser único'
     assert_includes product_category.errors[:name], 'deve ser único'
   end

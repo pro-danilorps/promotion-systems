@@ -1,15 +1,14 @@
 require 'application_system_test_case'
 
 class ProductCategoriesTest < ApplicationSystemTestCase
-
   def setup
     @user = create_user
     @product_category = ProductCategory.create!(
-                          name: 'Produto Anti-Fraude',
-                          code: 'ANTIFRA'
-                        )
+      name: 'Produto Anti-Fraude',
+      code: 'ANTIFRA'
+    )
     ProductCategory.create!(
-      name: 'Produto Pro-Fraude', 
+      name: 'Produto Pro-Fraude',
       code: 'PROFRA'
     )
     login_as @user
@@ -47,7 +46,7 @@ class ProductCategoriesTest < ApplicationSystemTestCase
     visit root_path
     click_on 'Categorias de Produto'
     click_on 'Produto Anti-Fraude'
-    
+
     accept_confirm do
       click_on 'Apagar Categoria de Produto'
     end

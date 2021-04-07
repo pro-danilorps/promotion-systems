@@ -6,9 +6,8 @@ class Promotion::GenerateCouponsTest < ApplicationSystemTestCase
     approver = create_another_user
     login_as user
     promotion = Promotion.create!(name: 'Natal', description: 'Promoção de Natal',
-      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-      expiration_date: '22/12/2033', user: user
-    )
+                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                                  expiration_date: '22/12/2033', user: user)
     login_as approver
     approver.promotion_approvals.create!(promotion: promotion)
 
