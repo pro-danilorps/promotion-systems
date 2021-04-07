@@ -1,46 +1,34 @@
 class Api::V1::ProductCategoriesController < Api::V1::ApiController
-
-  def index
-    @product_categories = ProductCategory.all
-  end
-
+  before_action :product_category_find, only: %i[show update destroy]
+  
   def show
-    @product_category = ProductCategory.find_by!(code: params[:code])
   end
   
   def create
-    @product_category = ProductCategory.new(product_category_params)
-    if @product_category.save
-      redirect_to @product_category
-    else
-      render :new
-    end
+    ProductCategory.create!(product_category_params)
+    head 201
   end
 
   def update
-    @product_category = ProductCategory.find(params[:id])
-
-    if @product_category.update(product_category_params)
-      flash[:notice] = 'Alterações feitas com sucesso!'
-      redirect_to @product_category
-    else
-      render :edit
-    end
+    @product_category.update!(product_category_params)
+    head 202
   end
 
   def destroy
-    ProductCategory.destroy(params[:id])
-    flash[:notice] = 'Categoria apagada com sucesso!'
-    redirect_to product_categories_path
+    @product_category.destroy!
+    head 204
   end
   
   private
 
+  def product_category_find
+    @product_category = ProductCategory.find_by!(code: params[:code])
+  end
+
   def product_category_params
-    params.permit(
-      :name,
-      :code
-    )
+    params
+      .require(:product_category)
+      .permit(:name, :code)
   end
 
 end
