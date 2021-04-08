@@ -9,21 +9,14 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <style>
-    h1 a {
-      color: gold
-    }
-    a {
-      color: green;
-      text-decoration: none
-    }
-  </style>
   <body>
-    <div style="background:green;padding:1em">
-      <h1><%= link_to 'Promotion System', root_path%></h1> 
+    <div class="container">
+      <div>
+        <h1><%= link_to 'Promotion System', root_path%></h1> 
+      </div>
+      <%= render "shared/nav" %>
+      <%= render "shared/flash" %>
+      <%= yield %>
     </div>
-    <%= render "shared/nav" %>
-    <%= render "shared/flash" %>
-    <%= yield %>
   </body>
 </html>
