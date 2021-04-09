@@ -24,9 +24,6 @@
     <%= f.text_field :expiration_date %>
   </div>
   <div>
-    <%= f.collection_check_boxes :product_categories, ProductCategory.all, :id, :code, { checked: @promotion.product_categories.map(&:to_param) } %>
-  </div>
-  <div>
     <%= f.submit submit_text %>
   </div>
 <% end %>

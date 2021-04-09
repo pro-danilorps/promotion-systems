@@ -26,14 +26,6 @@
   <dd><%= @promotion.coupon_quantity%></dd>
   <dt><%= Promotion.human_attribute_name(:user) %></dt>
   <dd><%=@promotion.user.name%></dd>
-  <% if @promotion.product_categories.exists? %>
-    <dt>Categorias de Produto</dt>
-    <dd>
-      <% @promotion.product_categories.each do |pc| %>
-        <%= pc.name %>
-      <% end %>
-    </dd>
-  <% end %>
   <% if @promotion.approver %>
     <dt><%= Promotion.human_attribute_name(:approver) %></dt>
     <dd><%=@promotion.approver.name %></dd>

@@ -3,7 +3,6 @@ class Promotion < ApplicationRecord
   has_many :coupons, dependent: :restrict_with_error
   has_one :promotion_approval, dependent: :restrict_with_error
   has_one :approver, through: :promotion_approval, source: :user
-  has_and_belongs_to_many :product_categories
 
   validates :name, :code, :discount_rate,
             :coupon_quantity, :expiration_date,
