@@ -1,17 +1,19 @@
 <h3><%= @promotion.name %></h3>
 <%= link_to t('buttons.back'), promotions_path %>
+<% # TODO: Refatorar essas condicionais abaixo %>
 <% if @promotion.approved? %>
   <% unless @promotion.coupons? %>
   | <%= link_to t('.generate_coupons'), generate_coupons_promotion_path, method: :post %>
   <% end %>
 <% elsif @promotion.can_approve?(current_user) %>
   | <%= link_to t('.approve_promotion'), approve_promotion_path(@promotion),
-        method: :post , data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name)} %>
-<% else %>
+        method: :post , data: { confirm: t('.data-confirm', action: 'aprovar', promotion_name: @promotion.name) } %>
+ <% end %>
+<% unless @promotion.coupons? %>
   | <%= link_to t('.edit_promotion'), edit_promotion_path(@promotion) %>
   | <%= link_to t('.delete_promotion'), promotion_path(@promotion),
         method: :delete,  data: { confirm: t('.data-confirm', action: 'apagar', promotion_name: @promotion.name) } %>
- <% end %>
+<% end%>
 <hr>
 <dl>
   <dt><%= Promotion.human_attribute_name(:description) %></dt>

@@ -3,16 +3,14 @@ require "rails_helper"
 RSpec.describe "Promotions management", :type => :system do
   before do
     driven_by(:selenium_chrome_headless)
-    @user, @approver = Fabricate.times(2, :user)
-    login_as(@user)
-    Fabricate.times(9,:promotion, user: @user, approver: @approver)
+    login_as(Fabricate(:user))
   end
 
   it 'view promotions' do
     Fabricate(:promotion, name: 'Natal',
-              description: 'Promoção de Natal', discount_rate: '10', user: @user)
+              description: 'Promoção de Natal', discount_rate: '10')
     Fabricate(:promotion, name: 'Cyber Monday',
-              description: 'Promoção de Cyber Monday', discount_rate: '15', user: @user)
+              description: 'Promoção de Cyber Monday', discount_rate: '15')
 
     visit root_path
     click_on 'Promoções'
@@ -26,6 +24,10 @@ RSpec.describe "Promotions management", :type => :system do
   end
 
   it 'view promotion details' do
+    Fabricate(:promotion, name: 'Natal 2021',
+      description: 'Promoção de Natal de 2021', discount_rate: '1',
+      code: 'NATAL21', expiration_date: '26/12/2021', coupon_quantity: '100')
+    
     visit root_path
     click_on 'Promoções'
     click_on 'Natal 2021'
@@ -38,34 +40,33 @@ RSpec.describe "Promotions management", :type => :system do
     expect(page).to have_text('100')
   end
 
-  # it 'no promotion are available' do
-  #   visit root_path
-  #   click_on 'Promoções'
+  it 'no promotion are available' do
+    visit root_path
+    click_on 'Promoções'
 
-  #   expect(page).to have_text('Nenhuma promoção cadastrada')
-  # end
+    expect(page).to have_text('Nenhuma promoção cadastrada')
+  end
 
   it 'view promotions and return to home page' do
     visit root_path
     click_on 'Promoções'
     click_on 'Voltar'
 
-    #assert_current_path root_path
-    expect(page).to assert_template(root_path)
+    expect(current_path).to eq(root_path)
   end
 
   it 'view details and return to promotions page' do
+    Fabricate(:promotion, name:'Natal 2021')
+    
     visit root_path
     click_on 'Promoções'
-    click_on 'Natal'
+    click_on 'Natal 2021'
     click_on 'Voltar'
 
-    assert_current_path promotions_path
+    expect(current_path).to eq(promotions_path)
   end
 
   it 'create promotion' do
-    destroy_promotions
-
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar uma Promoção'
@@ -77,14 +78,14 @@ RSpec.describe "Promotions management", :type => :system do
     fill_in 'Data de término', with: '22/12/2033'
     click_on 'Criar Promoção'
 
-    assert_current_path promotion_path(Promotion.last)
+    expect(current_path).to eq(promotion_path(Promotion.last))
     expect(page).to have_text('Cyber Monday')
     expect(page).to have_text('Promoção de Cyber Monday')
     expect(page).to have_text('15,00%')
     expect(page).to have_text('CYBER15')
     expect(page).to have_text('22/12/2033')
     expect(page).to have_text('90')
-    assert_link 'Voltar'
+    expect(page).to have_link('Voltar')
   end
 
   it 'create and attributes cannot be blank' do
@@ -97,6 +98,8 @@ RSpec.describe "Promotions management", :type => :system do
   end
 
   it 'create and code/name must be unique' do
+    Fabricate(:promotion, name: 'Natal', code: 'NATAL10')
+    
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar uma Promoção'
@@ -108,7 +111,9 @@ RSpec.describe "Promotions management", :type => :system do
   end
 
   it 'input blank into edit' do
-    visit edit_promotion_path(@promotion)
+    promotion = Fabricate(:promotion)
+
+    visit edit_promotion_path(promotion)
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     fill_in 'Código', with: ''
@@ -121,31 +126,34 @@ RSpec.describe "Promotions management", :type => :system do
   end
 
   it 'successfully edit an promotion' do
-    visit edit_promotion_path(@promotion)
-    fill_in 'Nome', with: 'Natal de 2021'
+    promotion = Fabricate(:promotion)
+
+    visit edit_promotion_path(Promotion.last)
+    fill_in 'Nome', with: 'Cyber Promoção'
     click_on 'Confirmar Alterações'
 
-    expect(page).to have_text('Natal de 2021')
+    expect(page).to have_text('Cyber Promoção')
     expect(page).to have_text('Alterações feitas com sucesso')
   end
 
   it 'destroy a promotion' do
-    visit promotion_path(@promotion)
+    promotion = Fabricate(:promotion)
+
+    visit promotion_path(promotion)
     accept_confirm { click_on 'Apagar Promoção' }
 
-    assert_no_text 'Natal'
+    expect(page).to_not have_text('Natal 2029')
     expect(page).to have_text('Promoção apagada com sucesso')
   end
 
   it 'inability to edit or delete a promotion that has generated coupons' do
-    user = create_another_user
-    login_as(user)
+    promotion = Fabricate(:promotion)
 
-    visit promotion_path(@promotion)
+    visit promotion_path(promotion)
     accept_confirm { click_on 'Aprovar Promoção' }
     click_on 'Gerar Cupons'
 
-    assert_no_link 'Apagar Promoção'
-    assert_no_link 'Editar Promoção'
+    expect(page).to_not have_link('Apagar Promoção')
+    expect(page).to_not have_link('Editar Promoção')
   end
 end

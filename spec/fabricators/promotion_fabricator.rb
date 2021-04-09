@@ -5,4 +5,5 @@ Fabricator(:promotion) do
   discount_rate { sequence(:discount_rate) { |i| "#{(i+1)*(i+1)}".to_i }}
   coupon_quantity '100'
   expiration_date { sequence(:expiration_date) { |i| "26/12/202#{i+1}" }}
+  user
 end

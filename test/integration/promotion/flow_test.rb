@@ -15,8 +15,6 @@ class Promotion::FlowTest < ActionDispatch::IntegrationTest
     @promotion = Promotion.last
   end
 
-  # TODO: Fixar o can create a promotion
-
   test 'can create a promotion' do
     login_as @user
     post '/promotions', params: {
