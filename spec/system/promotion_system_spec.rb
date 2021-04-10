@@ -156,4 +156,85 @@ RSpec.describe "Promotions management", :type => :system do
     expect(page).to_not have_link('Apagar Promoção')
     expect(page).to_not have_link('Editar Promoção')
   end
+
+  it 'approve a promotion' do
+    promotion = Fabricate(:promotion)
+    login_as(Fabricate(:user))
+
+    visit promotion_path(promotion)
+    accept_confirm { click_on 'Aprovar Promoção' }
+
+    expect(page).to have_text("Promoção #{promotion.name} aprovada com sucesso")
+  end
+
+  it 'cannot to approve your own promotion' do
+    promotion = Fabricate(:promotion)
+    login_as(promotion.user)
+    visit promotion_path(promotion)
+
+    expect(page).to_not have_link('Aprovar Promoção')
+  end
+
+  it 'cannot to generate coupons on an unapproved promotion' do
+    promotion = Fabricate(:promotion)
+    visit promotion_path(promotion)
+
+    expect(page).to_not have_link 'Gerar Cupons'
+  end
+
+  it 'generate promotion coupon codes' do
+    promotion = Fabricate(:promotion, code: 'CYBER10')
+    approver = Fabricate(:user)
+    login_as approver
+    approver.promotion_approvals.create!(promotion: promotion)
+
+    visit promotion_path(promotion)
+    click_on 'Gerar Cupons'
+
+    expect(page).to have_text('Cupons gerados com sucesso')
+    expect(page).to_not have_link('Gerar Cupons')
+    expect(page).to have_text('CYBER10-0001')
+    expect(page).to have_text('CYBER10-0010')
+    expect(page).to have_text('CYBER10-0100')
+    expect(page).to_not have_text('CYBER10-1000')
+  end
+
+  it 'search promotions by partial terms (and find results)' do
+    xmas = Fabricate(:promotion, name: 'Natal')
+    xmassy = Fabricate(:promotion, name: 'Natalina')
+    cyber = Fabricate(:promotion, name: 'Cyber Monday')
+
+    visit root_path
+    click_on 'Promoções'
+    fill_in 'Busca', with: 'Natal'
+    click_on 'Buscar'
+
+    expect(page).to have_text(xmas.name)
+    expect(page).to have_text(xmassy.name)
+    expect(page).to_not have_text(cyber.name)
+  end
+
+  it 'search promotions by exact terms (and find results)' do
+    xmas = Fabricate(:promotion, name: 'Natal')
+    xmassy = Fabricate(:promotion, name: 'Natalina')
+    cyber = Fabricate(:promotion, name: 'Cyber Monday')
+    
+    visit root_path
+    click_on 'Promoções'
+    fill_in 'Busca', with: 'Natal'
+    choose 'Busca Exata'
+    click_on 'Buscar'
+
+    expect(page).to have_text(xmas.name)
+    expect(page).to_not have_text(xmassy.name)
+    expect(page).to_not have_text(cyber.name)
+  end
+
+  it 'search blank and return error' do
+    visit root_path
+    click_on 'Promoções'
+    click_on 'Buscar'
+
+    expect(page).to have_text('Nenhuma promoção cadastrada ou encontrada')
+  end
 end
