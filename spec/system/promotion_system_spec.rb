@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Promotions management" do
+RSpec.describe "Promotions Management" do
   before do
     driven_by(:selenium_chrome_headless)
     login_as(Fabricate(:user))
