@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Promotions Management' do
+  include ActionMailer::TestHelper
   before do
     driven_by(:selenium_chrome_headless)
     login_as(Fabricate(:user))
@@ -162,9 +163,10 @@ RSpec.describe 'Promotions Management' do
     login_as(Fabricate(:user))
 
     visit promotion_path(promotion)
-    accept_confirm { click_on 'Aprovar Promoção' }
-
-    expect(page).to have_text("Promoção #{promotion.name} aprovada com sucesso")
+    assert_emails 1 do
+      accept_confirm { click_on 'Aprovar Promoção' }
+      expect(page).to have_text("Promoção #{promotion.name} aprovada com sucesso")
+    end
   end
 
   it 'cannot to approve your own promotion' do
