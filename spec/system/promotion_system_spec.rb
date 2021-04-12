@@ -1,6 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "Promotions Management" do
+RSpec.describe 'Promotions Management' do
   before do
     driven_by(:selenium_chrome_headless)
     login_as(Fabricate(:user))
@@ -8,9 +8,9 @@ RSpec.describe "Promotions Management" do
 
   it 'view promotions' do
     Fabricate(:promotion, name: 'Natal',
-              description: 'Promoção de Natal', discount_rate: '10')
+                          description: 'Promoção de Natal', discount_rate: '10')
     Fabricate(:promotion, name: 'Cyber Monday',
-              description: 'Promoção de Cyber Monday', discount_rate: '15')
+                          description: 'Promoção de Cyber Monday', discount_rate: '15')
 
     visit root_path
     click_on 'Promoções'
@@ -25,9 +25,9 @@ RSpec.describe "Promotions Management" do
 
   it 'view promotion details' do
     Fabricate(:promotion, name: 'Natal 2021',
-      description: 'Promoção de Natal de 2021', discount_rate: '1',
-      code: 'NATAL21', expiration_date: '26/12/2021', coupon_quantity: '100')
-    
+                          description: 'Promoção de Natal de 2021', discount_rate: '1',
+                          code: 'NATAL21', expiration_date: '26/12/2021', coupon_quantity: '100')
+
     visit root_path
     click_on 'Promoções'
     click_on 'Natal 2021'
@@ -56,8 +56,8 @@ RSpec.describe "Promotions Management" do
   end
 
   it 'view details and return to promotions page' do
-    Fabricate(:promotion, name:'Natal 2021')
-    
+    Fabricate(:promotion, name: 'Natal 2021')
+
     visit root_path
     click_on 'Promoções'
     click_on 'Natal 2021'
@@ -99,7 +99,7 @@ RSpec.describe "Promotions Management" do
 
   it 'create and code/name must be unique' do
     Fabricate(:promotion, name: 'Natal', code: 'NATAL10')
-    
+
     visit root_path
     click_on 'Promoções'
     click_on 'Registrar uma Promoção'
@@ -126,7 +126,7 @@ RSpec.describe "Promotions Management" do
   end
 
   it 'successfully edit an promotion' do
-    promotion = Fabricate(:promotion)
+    Fabricate(:promotion)
 
     visit edit_promotion_path(Promotion.last)
     fill_in 'Nome', with: 'Cyber Promoção'
@@ -218,7 +218,7 @@ RSpec.describe "Promotions Management" do
     xmas = Fabricate(:promotion, name: 'Natal')
     xmassy = Fabricate(:promotion, name: 'Natalina')
     cyber = Fabricate(:promotion, name: 'Cyber Monday')
-    
+
     visit root_path
     click_on 'Promoções'
     fill_in 'Busca', with: 'Natal'

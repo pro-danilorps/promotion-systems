@@ -1,19 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "Promotion Model Test" do
+RSpec.describe 'Promotion Model Test' do
   before do
     user = Fabricate(:user)
     @xmas = Fabricate(:promotion, name: 'Natal', description: 'Promoção de Natal',
-                      code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
-                      expiration_date: '22/12/2033')
+                                  code: 'NATAL10', discount_rate: 10, coupon_quantity: 100,
+                                  expiration_date: '22/12/2033')
 
     @xmassy = Fabricate(:promotion, name: 'Natalina', description: 'Promoção Natalina',
-                        code: 'NATALINA15', discount_rate: 15, coupon_quantity: 100,
-                        expiration_date: '22/12/2033')
+                                    code: 'NATALINA15', discount_rate: 15, coupon_quantity: 100,
+                                    expiration_date: '22/12/2033')
 
     @cyber = Fabricate(:promotion, name: 'Cyber Monday', description: 'Promoção de Cyber Monday',
-                       code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
-                       expiration_date: '22/12/2033')
+                                   code: 'CYBER20', discount_rate: 20, coupon_quantity: 200,
+                                   expiration_date: '22/12/2033')
     login_as(user)
   end
 

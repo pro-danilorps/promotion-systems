@@ -20,7 +20,8 @@ Style/Documentation:
 Style/FrozenStringLiteralComment:
  Enabled: false
 Metrics/BlockLength:
- IgnoredMethods: ['test']
+  Exclude:
+    - 'spec/**/*'
 Metrics/ClassLength:
   Exclude:
-    - 'test/**/*'
+    - 'spec/**/*'

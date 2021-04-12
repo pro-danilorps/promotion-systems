@@ -1,10 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe 'Authentication Test' do
   before do
     driven_by(:selenium_chrome_headless)
   end
-  
+
   it 'user sign up' do
     visit root_path
     click_on 'Cadastrar'
@@ -23,7 +23,7 @@ RSpec.describe 'Authentication Test' do
   end
 
   it 'user sign in' do
-    user = Fabricate(:user, email:'fulano@iugu.com.br', password: '123456')
+    user = Fabricate(:user, email: 'fulano@iugu.com.br', password: '123456')
 
     visit root_path
     click_on 'Entrar'

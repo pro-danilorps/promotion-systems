@@ -1,7 +1,6 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe "Product Category API Tests" do
-
+RSpec.describe 'Product Category API Tests' do
   it 'show product category name and code' do
     product_category = Fabricate(:product_category)
 

@@ -1,12 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe 'Promotion API Tests' do
-  
   it 'show coupon' do
-    headers = { "ACCEPT" => "application/json" }
     promotion = Fabricate(:promotion)
-    coupon = Coupon.create!(code: 'NATAL1', promotion: promotion)    
-    
+    coupon = Coupon.create!(code: 'NATAL1', promotion: promotion)
+
     get "/api/v1/coupons/#{coupon.code}", as: :json
 
     expect(response).to have_http_status(:success)

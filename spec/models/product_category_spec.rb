@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Product Category Model Test' do
- it 'attributes cannot be blank' do
+  it 'attributes cannot be blank' do
     product_category = ProductCategory.new
 
     expect(product_category.valid?).not_to eq(true)

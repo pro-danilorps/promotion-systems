@@ -1,10 +1,10 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe 'Product Categories Test' do
   before do
     driven_by(:selenium_chrome_headless)
     login_as(Fabricate(:user))
-    
+
     @product_category = ProductCategory.create!(
       name: 'Produto Anti-Fraude',
       code: 'ANTIFRA'
@@ -51,7 +51,7 @@ RSpec.describe 'Product Categories Test' do
     accept_confirm do
       click_on 'Apagar Categoria de Produto'
     end
-    
+
     expect(page).to have_text('Categoria apagada com sucesso!')
   end
 end
